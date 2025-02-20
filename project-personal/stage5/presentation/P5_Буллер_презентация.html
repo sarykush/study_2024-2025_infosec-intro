@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Буллер Т.А.">
+  <title>Индивидуальный проект. Этап 5</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/beige.css" id="theme">
+  
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Индивидуальный проект. Этап 5</h1>
+  <p class="subtitle">Использование Burp Suite. Уязвимости DVWA</p>
+  <p class="author">Буллер Т.А.</p>
+  <p class="date">18 февраля 2025</p>
+</section>
+
+<section id="информация" class="slide level1">
+<h1>Информация</h1>
+<h2 id="докладчик">Докладчик</h2>
+<ul>
+<li>Буллер Татьяна Александровна</li>
+<li>студент направления Бизнес-информатика</li>
+<li>Российский университет дружбы народов</li>
+</ul>
+</section>
+<section id="вводная-часть" class="slide level1">
+<h1>Вводная часть</h1>
+<h2 id="объект-и-предмет-исследования">Объект и предмет исследования</h2>
+<ul>
+<li>Burp Suite</li>
+<li>Веб-приложение DVWA</li>
+</ul>
+<h2 id="цели-и-задачи">Цели и задачи</h2>
+<ul>
+<li>Знакомство со набором инструментов Burp Suite и тестирование его возможностей на примере DVWA. Исследование прочих типов уязвимостей, для эксплуатации которых нет необходимости применять дополнительный инструментарий.</li>
+</ul>
+<h2 id="материалы-и-методы">Материалы и методы</h2>
+<ul>
+<li>Среда виртуализации VirtualBox</li>
+<li>Виртуальная машина Kali Linux</li>
+<li>Burp Suite</li>
+<li>Веб-приложение DVWA</li>
+</ul>
+</section>
+<section id="ход-работы" class="slide level1">
+<h1>Ход работы</h1>
+<h2 id="command-execution">Command Execution</h2>
+<p>Command Execution - тип уязвимости, позволяющий злоумышленнику запускать на сервере произвольные команды. Чаще всего встречается в приложениях, где реализована и не профильтрована должным образом передача пользовательского ввода в командную строку сервера. Нас странице этой уязвимости в DVWA видим форму, которая позволяет осуществить команду ping.</p>
+<h2 id="command-execution-1">Command Execution</h2>
+<figure>
+<img data-src="image/1.png" id="fig:001" style="width:70.0%" alt="ping" /><figcaption aria-hidden="true">ping</figcaption>
+</figure>
+<h2 id="command-execution-2">Command Execution</h2>
+<p>Для эксплуатации данной уязвимости нам необходимо объеденить ввод для команды ping со следующей командой, которую мы хотим подать на сервер, чтобы они запустились последовательно. Сделаем это, использовав знак разделения ;, и получим вывод, которого не должны видеть по изначальной логике приложения.</p>
+<figure>
+<img data-src="image/2.png" id="fig:002" style="width:70.0%" alt="Две команды" /><figcaption aria-hidden="true">Две команды</figcaption>
+</figure>
+<h2 id="command-execution-3">Command Execution</h2>
+<figure>
+<img data-src="image/3.png" id="fig:003" style="width:50.0%" alt="Вывод двух команд" /><figcaption aria-hidden="true">Вывод двух команд</figcaption>
+</figure>
+<h2 id="cross-site-request-forgery-csrf">Cross Site Request Forgery (CSRF)</h2>
+<p>Cross Site Request Forgery (CSRF) - уязвимость, позволяющая злоумышленнику подделывать запросы, отправляемые на сайт, через свои домены. На странице этой уязвимости видим форму замены пароля.</p>
+<figure>
+<img data-src="image/4.png" id="fig:004" style="width:40.0%" alt="Страница CSRF" /><figcaption aria-hidden="true">Страница CSRF</figcaption>
+</figure>
+<h2 id="cross-site-request-forgery-csrf-1">Cross Site Request Forgery (CSRF)</h2>
+<p>Открыв код страницы сочетанием клавиш Ctrl+U видим html-код этой формы. Это все, что нам нужно для эксплуатации: мы можем создать аналогичную форму на локальном сервере, скопировав код и подменив файл form action на адрес страницы, которой хотим подделать запрос.</p>
+<h2 id="cross-site-request-forgery-csrf-2">Cross Site Request Forgery (CSRF)</h2>
+<figure>
+<img data-src="image/5.png" id="fig:005" style="width:50.0%" alt="Код страницы" /><figcaption aria-hidden="true">Код страницы</figcaption>
+</figure>
+<h2 id="cross-site-request-forgery-csrf-3">Cross Site Request Forgery (CSRF)</h2>
+<figure>
+<img data-src="image/6.png" id="fig:006" style="width:50.0%" alt="Подделанная форма" /><figcaption aria-hidden="true">Подделанная форма</figcaption>
+</figure>
+<h2 id="cross-site-request-forgery-csrf-4">Cross Site Request Forgery (CSRF)</h2>
+<p>Открыв файл подделанной формы на локальном сервере, введем новый пароль и нажмем кнопку “заменить”. После этого нас перенаправит на страницу уязвимости, которую мы рассматривали ранее, где будет сообщено, что пароль успешно изменен. При попытке зайти со старым паролем, действительно, логин провалится, тогда как новый пароль сработает.</p>
+<figure>
+<img data-src="image/7.png" id="fig:007" style="width:40.0%" alt="Смена пароля" /><figcaption aria-hidden="true">Смена пароля</figcaption>
+</figure>
+<h2 id="cross-site-request-forgery-csrf-5">Cross Site Request Forgery (CSRF)</h2>
+<figure>
+<img data-src="image/8.png" id="fig:008" style="width:50.0%" alt="Редирект на уязвимую страницу" /><figcaption aria-hidden="true">Редирект на уязвимую страницу</figcaption>
+</figure>
+<h2 id="file-inclusion-lfi-и-burp-suite">File Inclusion (LFI) и Burp Suite</h2>
+<p>File Inclusion - уязвимость небезопасного включения файлов с сервера. Так, на странице этой уязвимости в DVWA мы можем видеть, что страница в параметре page подключает файл include.php. Можно предположить, что мы можем подключить и какой-то другой файл. Возможно, даже тот, который находится вне данной директории. Как раз для этого используем Burp Suite.</p>
+<h2 id="file-inclusion-lfi-и-burp-suite-1">File Inclusion (LFI) и Burp Suite</h2>
+<figure>
+<img data-src="image/9.png" id="fig:009" style="width:70.0%" alt="Страница LFI" /><figcaption aria-hidden="true">Страница LFI</figcaption>
+</figure>
+<h2 id="file-inclusion-lfi-и-burp-suite-2">File Inclusion (LFI) и Burp Suite</h2>
+<p>Для работы с Burp Suite было использовано расширение FoxyProxy. Прокси настроен на порт 8080 на локалхост. Это позволит Burp Suite перехватывать отправляемые запросы.</p>
+<figure>
+<img data-src="image/10.png" id="fig:010" style="width:70.0%" alt="Прокси" /><figcaption aria-hidden="true">Прокси</figcaption>
+</figure>
+<h2 id="file-inclusion-lfi-и-burp-suite-3">File Inclusion (LFI) и Burp Suite</h2>
+<p>Включив прокси, запустив перехват трафика в Burp и перезагрузив страницу, получим перехваченный GET-запрос к ней. Видим здесь интересующий нас параметр: имя подключаемого файла. Далее можно пойти двумя путями. Либо перебирать варианты и отправлять запросы вручную через Repeater, либо составить (или раздобыть) список полезных нагрузок и автоматизировать процесс через Intruder. Список я дам. Поэтому выбираю второй вариант.</p>
+<h2 id="file-inclusion-lfi-и-burp-suite-4">File Inclusion (LFI) и Burp Suite</h2>
+<figure>
+<img data-src="image/11.png" id="fig:011" style="width:70.0%" alt="GET-запрос с выделенным местом для вставки пэйлоада" /><figcaption aria-hidden="true">GET-запрос с выделенным местом для вставки пэйлоада</figcaption>
+</figure>
+<h2 id="file-inclusion-lfi-и-burp-suite-5">File Inclusion (LFI) и Burp Suite</h2>
+<p>Тип атаки, который будем проводить в данном (и всех последующих) случаях - Sniper. Эта атака использует один набор полезной нагрузки и подставляет его во все выделенные места. Список нагрузок возьму из стандартных словарей Kali для фаззинговой утилиты wfuzz.</p>
+<figure>
+<img data-src="image/12.png" id="fig:012" style="width:40.0%" alt="Полезные нагрузки" /><figcaption aria-hidden="true">Полезные нагрузки</figcaption>
+</figure>
+<h2 id="file-inclusion-lfi-и-burp-suite-6">File Inclusion (LFI) и Burp Suite</h2>
+<p>Отсортировав ответы по длине, видим, что нам удалось подключить файл /etc/passwd.</p>
+<figure>
+<img data-src="image/13.png" id="fig:013" style="width:40.0%" alt="Результат атаки" /><figcaption aria-hidden="true">Результат атаки</figcaption>
+</figure>
+<h2 id="sql-injection-и-blind-sql-injection">SQL Injection и Blind SQL Injection</h2>
+<p>SQL - язык, используемый для написания баз данных. В случае, когда пользовательский ввод фильтруется недостаточно, пользователь может передавать команды базе данных и получать содержимое, которое он видеть не должен. Для атаки используем тот же режим Sniper в Intruder, словарь - словарь SQL-инъекций для wfuzz.</p>
+<h2 id="sql-injection-и-blind-sql-injection-1">SQL Injection и Blind SQL Injection</h2>
+<figure>
+<img data-src="image/14.png" id="fig:014" style="width:70.0%" alt="Результат атаки SQLi" /><figcaption aria-hidden="true">Результат атаки SQLi</figcaption>
+</figure>
+<h2 id="sql-injection-и-blind-sql-injection-2">SQL Injection и Blind SQL Injection</h2>
+<p>Особенность Blind SQLi в том, что, в отличие от обычного случая, база данных не дает никакого ответа об ошибках, на которые можно было бы ориетироваться. Так, если до этого мы встречали ответы сервера абсолютно крохотной длины (460), содержащие только сообщения об ошибках, теперь все неудачные атаки дают ответ длины 4671 и на них сложно ориентироваться, пытаясь составить правильный запрос к базе.</p>
+<h2 id="sql-injection-и-blind-sql-injection-3">SQL Injection и Blind SQL Injection</h2>
+<figure>
+<img data-src="image/15.png" id="fig:015" style="width:70.0%" alt="Результат атаки Blind SQLi" /><figcaption aria-hidden="true">Результат атаки Blind SQLi</figcaption>
+</figure>
+<h2 id="file-upload">File Upload</h2>
+<p>File Upload - уязвимость загрузки и исполнения произвольных пользовательских файлов на сервере. В самом простейшем ее варианте, который рассмотрим здесь, файлы, загружаемые пользователем, не проверяются вообще никак. В других случаях страницы также могут быть уязвимы к подмене MIME-type в запросе или двойным расширениям. Так, отправляя php файл, я могу перехватить запрос и заменить в теле Content-Type: application/php на image/jpeg, или отправить файл .jpeg.php, что можно так же реализовать через Burp Proxy. Для данного примера был использован реверс-шелл pentestmonkey, по умолчанию включенный в Kali Linux.</p>
+<h2 id="file-upload-1">File Upload</h2>
+<figure>
+<img data-src="image/16.png" id="fig:016" style="width:50.0%" alt="php-reverse-shell.php" /><figcaption aria-hidden="true">php-reverse-shell.php</figcaption>
+</figure>
+<h2 id="file-upload-2">File Upload</h2>
+<figure>
+<img data-src="image/19.png" id="fig:017" style="width:50.0%" alt="Загруженный скрипт" /><figcaption aria-hidden="true">Загруженный скрипт</figcaption>
+</figure>
+<h2 id="file-upload-3">File Upload</h2>
+<p>Загрузив этот файл на уязвимую страницу, открываем netcat на прослушивание порта 1234, который оставили для подключения в шелле.</p>
+<h2 id="file-upload-4">File Upload</h2>
+<figure>
+<img data-src="image/18.png" id="fig:018" style="width:70.0%" alt="netcat" /><figcaption aria-hidden="true">netcat</figcaption>
+</figure>
+<h2 id="file-upload-5">File Upload</h2>
+<p>После того, как мы попытаемся перейти на страницу, куда загружен этот файл, скрипт запустится, и netcat получит подключение от сервера. Теперь мы можем разбирать машину изнутри.</p>
+<h2 id="file-upload-6">File Upload</h2>
+<figure>
+<img data-src="image/20.png" id="fig:019" style="width:70.0%" alt="Работа reverse shell" /><figcaption aria-hidden="true">Работа reverse shell</figcaption>
+</figure>
+</section>
+<section id="выводы" class="slide level1">
+<h1>Выводы</h1>
+<p>Была освоена работа с набором инструментов Burp Suite и протестированы его возможности на примере DVWA. Были исследованы прочие типы уязвимостей (CSRF, Commang injection), для эксплуатации которых нет необходимости применять дополнительный инструментарий.</p>
+</section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^4//dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^4//plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+      
+        // Push each slide change to the browser history
+        history: true,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>

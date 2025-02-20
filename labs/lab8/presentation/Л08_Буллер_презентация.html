@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Буллет Т. А.">
+  <title>Лабораторная работа №8</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/beige.css" id="theme">
+  
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Лабораторная работа №8</h1>
+  <p class="subtitle">Элементы криптографии. Шифрование (кодирование) различных исходных текстов одним ключом</p>
+  <p class="author">Буллет Т. А.</p>
+  <p class="date">16 февраля 2025</p>
+</section>
+
+<section id="информация" class="slide level1">
+<h1>Информация</h1>
+<h2 id="докладчик">Докладчик</h2>
+<div class="columns" data-align="center">
+<div class="column" style="width:70%;">
+<ul>
+<li>Буллер Татьяна Александровна</li>
+<li>студент направления Бизнес-информатика</li>
+<li>Российский университет дружбы народов</li>
+</ul>
+</div><div class="column" style="width:30%;">
+
+</div>
+</div>
+</section>
+<section id="вводная-часть" class="slide level1">
+<h1>Вводная часть</h1>
+<h2 id="объект-и-предмет-исследования">Объект и предмет исследования</h2>
+<ul>
+<li>Метод шифрования XOR</li>
+<li>Среда виртуализации VirtualBox</li>
+</ul>
+<h2 id="цели-и-задачи">Цели и задачи</h2>
+<ul>
+<li>Освоить на практике применение режима однократного гаммирования на примере кодирования различных исходных текстов одним ключом.</li>
+</ul>
+<h2 id="материалы-и-методы">Материалы и методы</h2>
+<ul>
+<li>Процессор <code>pandoc</code> для входного формата Markdown</li>
+<li>Среда виртуализации VirtualBox</li>
+<li>Язык программирования Python</li>
+</ul>
+</section>
+<section id="выполнение-лабораторной-работы" class="slide level1">
+<h1>Выполнение лабораторной работы</h1>
+<h2 id="генерация-ключа">Генерация ключа</h2>
+<p>В отличие от предыдущей работы, закодированные сообщения пользователь может выбрать сам. Поэтому для упрощения реализации возьмем стандартную кодировку ASCII, известную без дополнительных включений всем языкам программирования. Для обоих шифротекстов необходимо сгенерировать ключ. Помним, что для обеспечения шифру адекватной криптостойкости, длина ключа должна быть не менее длины шифротекста. Напишем функцию, которая по переданной ей длине текста сгенерирует для него случайную строку ключа шифрования:</p>
+<figure>
+<img data-src="image/1.png" id="fig:001" style="width:40.0%" alt="Функция генерацияи ключа" /><figcaption aria-hidden="true">Функция генерацияи ключа</figcaption>
+</figure>
+<h2 id="функция-операции-xor-для-двух-строк">Функция операции XOR для двух строк</h2>
+<p>Далее необходимо было написать код, с помощью которого можно было бы зашифровать сообщение. Для этого напишем простую функцию, которая в цикле по каждому символу исходного текста и соответствующему символу ключа сгенерирует символ нового текста.</p>
+<figure>
+<img data-src="image/2.png" id="fig:002" style="width:40.0%" alt="Функция шифрования" /><figcaption aria-hidden="true">Функция шифрования</figcaption>
+</figure>
+<h2 id="тело-программы">Тело программы</h2>
+<p>В теле программы зададим две строки открытого текста одинаковой длины (plain1 и plain2), взяв за текст стандартную рыбу Lorem Ipsum. По одному из текстов (в представленном примере - по первому) сгенерируем ключ с помощью написанной ранее функции, затем продемонстрируем шифрование строки этим ключом и дешифрование полученных шифротекстов.</p>
+<figure>
+<img data-src="image/3.png" id="fig:003" style="width:40.0%" alt="Тело программы: открытый текст, генерация ключа, шифротекст и расшифровка по ключу" /><figcaption aria-hidden="true">Тело программы: открытый текст, генерация ключа, шифротекст и расшифровка по ключу</figcaption>
+</figure>
+<h2 id="расшифровать-один-текст-через-второй">Расшифровать один текст через второй</h2>
+<p>В случае, когда мы имеем два сообщения одинаковой длины и известно, что они были зашифрованы одним ключом, мы можем расшифровать одно сообщение через второе. Для этого проведем простую операцию: XOR для двух шифротекстов. Это позволит получить ключ шифрования, который мог бы быть использован, чтобы операцией XOR на одном из открытых текстов получить второй. Владея одним из открытых текстов и этим ключом, мы можем получить второй открытый текст.</p>
+<figure>
+<img data-src="image/4.png" id="fig:004" style="width:40.0%" alt="Расшифровка одного текста через второй" /><figcaption aria-hidden="true">Расшифровка одного текста через второй</figcaption>
+</figure>
+<h2 id="вывод-программы">Вывод программы</h2>
+<p>Человекочитаемый вывод программы состоит из трех частей: операции над первым текстом (сам открытый текст, сгенерированный ключ, шифротекст и открытый текст, полученный от шифротекста и ключа), аналогичные операции для второго текста и получение открытых сообщений по двум шифротекстам и одному открытому.</p>
+<figure>
+<img data-src="image/5.png" id="fig:005" style="width:40.0%" alt="Вывод программы" /><figcaption aria-hidden="true">Вывод программы</figcaption>
+</figure>
+</section>
+<section id="выводы" class="slide level1">
+<h1>Выводы</h1>
+<p>Было освоено на практике применение режима однократного гаммирования на примере кодирования различных исходных текстов одним ключом, написана программа, шифрующая две строки одним случайно сгенерированным ключом и дешифрующая шифротексты обратно по одному открытому тексту и двум шифрам.</p>
+</section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^4//dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^4//plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+      
+        // Push each slide change to the browser history
+        history: true,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>

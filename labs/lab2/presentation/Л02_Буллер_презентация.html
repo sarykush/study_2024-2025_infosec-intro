@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Буллет Т. А.">
+  <title>Лабораторная работа №2</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/beige.css" id="theme">
+  
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Лабораторная работа №2</h1>
+  <p class="subtitle">Дискреционное разграничение прав в Linux. Основные атрибуты</p>
+  <p class="author">Буллет Т. А.</p>
+  <p class="date">14 февраля 2025</p>
+</section>
+
+<section id="информация" class="slide level1">
+<h1>Информация</h1>
+<h2 id="докладчик">Докладчик</h2>
+<div class="columns" data-align="center">
+<div class="column" style="width:70%;">
+<ul>
+<li>Буллер Татьяна Александровна</li>
+<li>студент направления Бизнес-информатика</li>
+<li>Российский университет дружбы народов</li>
+</ul>
+</div><div class="column" style="width:30%;">
+
+</div>
+</div>
+</section>
+<section id="вводная-часть" class="slide level1">
+<h1>Вводная часть</h1>
+<h2 id="объект-и-предмет-исследования">Объект и предмет исследования</h2>
+<ul>
+<li>Операционная система linux, дисрибутив Rocky</li>
+<li>Среда виртуализации VirtualBox</li>
+</ul>
+<h2 id="цели-и-задачи">Цели и задачи</h2>
+<ul>
+<li>Получение практических навыков работы в консоли с атрибутами файлов,</li>
+<li>закрепление теоретических основ дискреционного разграничения доступа в современных системах с открытым кодом на базе ОС Linux</li>
+</ul>
+<h2 id="материалы-и-методы">Материалы и методы</h2>
+<ul>
+<li>Процессор <code>pandoc</code> для входного формата Markdown</li>
+<li>Среда виртуализации VirtualBox</li>
+</ul>
+</section>
+<section id="выполнение-лабораторной-работы" class="slide level1">
+<h1>Выполнение лабораторной работы</h1>
+<h2 id="создание-пользователей">Создание пользователей</h2>
+<p>Для создания пользоваталей используем команду useradd с опцией -m, чтобы вместе с пользователем создать его домашнюю директорию и в дальнейшем иметь возможность зайти на рабочий стол под этой учетной записью.</p>
+<figure>
+<img data-src="image/1.png" id="fig:001" style="width:70.0%" alt="Создание пользователя" /><figcaption aria-hidden="true">Создание пользователя</figcaption>
+</figure>
+<h2 id="создание-пользователей-1">Создание пользователей</h2>
+<p>Далее задаем пароль для пользователя, который необходимо подтвердить, введя повторно.</p>
+<figure>
+<img data-src="image/2.png" id="fig:002" style="width:70.0%" alt="Пароль для пользователя" /><figcaption aria-hidden="true">Пароль для пользователя</figcaption>
+</figure>
+<h2 id="вход-в-систему-от-имени-созданного-пользователя">Вход в систему от имени созданного пользователя</h2>
+<p>С помощью команды su guest получаем неинтерактивную оболочку пользователя и переводим ее в интерактивную: в таком виде с ней удобнее работать. Команда pwd помогает определить, что в данный момент мы находимся в домашней директории созданного ранее пользователя.</p>
+<figure>
+<img data-src="image/3.png" id="fig:003" style="width:70.0%" alt="Вход в систему и рабочая директория" /><figcaption aria-hidden="true">Вход в систему и рабочая директория</figcaption>
+</figure>
+<h2 id="вход-в-систему-от-имени-созданного-пользователя-1">Вход в систему от имени созданного пользователя</h2>
+<p>Команда whoami выводит в терминал имя пользователя, от имени которого она была запущена. В нашем случае - guest.</p>
+<figure>
+<img data-src="image/4.png" id="fig:004" style="width:70.0%" alt="whoami" /><figcaption aria-hidden="true">whoami</figcaption>
+</figure>
+<h2 id="пользователь-в-системе">Пользователь в системе</h2>
+<p>Узнать, в каких группах состоит пользователь, можно двумя способами: командой id (выводит idпользователя и его имя, id группы пользователя и ее названия, а также id и названия прочих групп, куда входит данный пользователь) либо командой groups. Последняя, в отличие от первой, выводит на экран только названия групп.</p>
+<figure>
+<img data-src="image/5.png" id="fig:005" style="width:70.0%" alt="Группы пользователя" /><figcaption aria-hidden="true">Группы пользователя</figcaption>
+</figure>
+<h2 id="пользователь-в-системе-1">Пользователь в системе</h2>
+<p>Запросив содержимое файла /etc/passwd командой cat, мы можем видеть всех пользователей машины, их uid и gid. Для созданного пользователя uid и gid совпадают: 1002.</p>
+<figure>
+<img data-src="image/6.png" id="fig:006" style="width:70.0%" alt="Содержимое файла /etc/passwd" /><figcaption aria-hidden="true">Содержимое файла /etc/passwd</figcaption>
+</figure>
+<h2 id="пользователь-в-системе-2">Пользователь в системе</h2>
+<p>Командой ls -l /home/ определим существующие в системе домашние директории пользователей. Видим, что их три: guest, созданный по ходу выполнения лабораторной работы, tabuller - основной пользователь для выполнения лабораторных работ и jordi. Кто он и зачем существует - дело десятое. jordi. В каждой из директорий владелец имеет право на чтение, запись и исполнение. В директориях tabuller и jordi право на чтение и исполнение файлов также имеют участники группы и остальные пользователи машины.</p>
+<figure>
+<img data-src="image/7.png" id="fig:007" style="width:70.0%" alt="Домашние директории пользователей" /><figcaption aria-hidden="true">Домашние директории пользователей</figcaption>
+</figure>
+<h2 id="пользователь-в-системе-3">Пользователь в системе</h2>
+<p>С помощью lsattr можем увидеть, что у каждой из домашних директорий установлен атрибут е.</p>
+<figure>
+<img data-src="image/8.png" id="fig:008" style="width:70.0%" alt="Атрибуты директорий" /><figcaption aria-hidden="true">Атрибуты директорий</figcaption>
+</figure>
+<h2 id="права-директорий-и-файлов">Права директорий и файлов</h2>
+<p>В домашней директории пользователя guest создадим директорию dir1. Можно увидеть, что сразу после создания директория выдает все права владельцу и права на чтение и исполнение членам группы и прочим пользователям.</p>
+<figure>
+<img data-src="image/9.png" id="fig:009" style="width:70.0%" alt="Создание директории и права на нее" /><figcaption aria-hidden="true">Создание директории и права на нее</figcaption>
+</figure>
+<h2 id="права-директорий-и-файлов-1">Права директорий и файлов</h2>
+<p>По умолчанию также у всех директорий внутри домашней установлен атрибут е: то же самое, что мы видели и в директории /home</p>
+<figure>
+<img data-src="image/10.png" id="fig:010" style="width:70.0%" alt="Атрибуты директорий внутри домашнего каталога пользователя" /><figcaption aria-hidden="true">Атрибуты директорий внутри домашнего каталога пользователя</figcaption>
+</figure>
+<h2 id="права-директорий-и-файлов-2">Права директорий и файлов</h2>
+<p>Снимем все права с созданной нами директории. Можем видеть, что вывод команды ls -l теперь показывает только то, что перед нами директория. Никто не имеет права ни на чтение, ни на запись, ни на исполнение файлов. Владелец в том числе.</p>
+<figure>
+<img data-src="image/11.png" id="fig:011" style="width:70.0%" alt="У гостей нет прав" /><figcaption aria-hidden="true">У гостей нет прав</figcaption>
+</figure>
+<h2 id="права-директорий-и-файлов-3">Права директорий и файлов</h2>
+<p>При попытке создать файл внутри директории и перенаправить в него вывод команды эхо сталкиваемся с ошибкой: на эту директорию у пользователя больше нет прав.</p>
+<figure>
+<img data-src="image/12.png" id="fig:012" style="width:70.0%" alt="У гостей нет прав создать файл" /><figcaption aria-hidden="true">У гостей нет прав создать файл</figcaption>
+</figure>
+<h2 id="права-директорий-и-файлов-4">Права директорий и файлов</h2>
+<p>При попытке прочитать содержимое директории тоже ничего не увидим: права на чтение сняты вместе со всеми остальными.</p>
+<figure>
+<img data-src="image/13.png" id="fig:013" style="width:70.0%" alt="У гостей нет прав читать директорию" /><figcaption aria-hidden="true">У гостей нет прав читать директорию</figcaption>
+</figure>
+<h2 id="права-директорий-и-файлов-5">Права директорий и файлов</h2>
+<p>На основе полученной информации была заполнена таблица о правах доступа владельца.</p>
+</section>
+<section id="выводы" class="slide level1">
+<h1>Выводы</h1>
+<p>Получены практические навыки работы в консоли с атрибутами файлов, закреплены теоретические основы дискреционного разграничения доступа в современных системах с открытым кодом на базе ОС Linux</p>
+</section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^4//dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^4//plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+      
+        // Push each slide change to the browser history
+        history: true,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>

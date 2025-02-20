@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Буллер Т.А.">
+  <title>Индивидуальный проект. Этап 2</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/beige.css" id="theme">
+  
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Индивидуальный проект. Этап 2</h1>
+  <p class="subtitle">Установка DVWA</p>
+  <p class="author">Буллер Т.А.</p>
+  <p class="date">20 февраля 2025</p>
+</section>
+
+<section id="информация" class="slide level1">
+<h1>Информация</h1>
+<h2 id="докладчик">Докладчик</h2>
+<ul>
+<li>Буллер Татьяна Александровна</li>
+<li>студент направления Бизнес-информатика</li>
+<li>Российский университет дружбы народов</li>
+</ul>
+</section>
+<section id="вводная-часть" class="slide level1">
+<h1>Вводная часть</h1>
+<h2 id="объект-и-предмет-исследования">Объект и предмет исследования</h2>
+<ul>
+<li>Веб-приложение DVWA в составе Metasploitable</li>
+<li>Виртуальная машина Kali Linux</li>
+<li>Среда виртуализации VirtualBox</li>
+</ul>
+<h2 id="цели-и-задачи">Цели и задачи</h2>
+<ul>
+<li>Приобретение практических навыков создания виртуальной машины и запуска веб-сервера.</li>
+</ul>
+<h2 id="материалы-и-методы">Материалы и методы</h2>
+<ul>
+<li>Файлы установки Metasploitable для VMware</li>
+<li>Среда виртуализации VirtualBox</li>
+<li>Виртуальная машина Kali Linux</li>
+</ul>
+</section>
+<section id="ход-работы" class="slide level1">
+<h1>Ход работы</h1>
+<h2 id="ход-работы-1">Ход работы</h2>
+<p>Установка DVWA в данной работе будет рассмотрена в комплексе с созданием машины Metasploitable. Metasploitable - намеренно уязвимая машина, содержащая внутри себя такие веб-приложения, как DVWA, WebDAV и Mutillidae. DVWA - намеренно уязвимое веб-приложение, написанное на PHP и MySQL. Изначально Metasploitable создавался в расчете на совместимость с VMware, но VirtualBox также поддерживает формат виртуальных дисков .vmdk, с которого машина может быть запущена. Для этого добавим диск Metasploitable при выборе диска для машины.</p>
+<h2 id="ход-работы-2">Ход работы</h2>
+<figure>
+<img data-src="image/1.png" id="fig:001" style="width:40.0%" alt="Добавление виртуального диска" /><figcaption aria-hidden="true">Добавление виртуального диска</figcaption>
+</figure>
+<figure>
+<img data-src="image/2.png" id="fig:002" style="width:40.0%" alt="Настройки диска" /><figcaption aria-hidden="true">Настройки диска</figcaption>
+</figure>
+<h2 id="ход-работы-3">Ход работы</h2>
+<p>Metasploitable не предназначен для использования в качестве полностью рабочей машины, ресурсов ему оставим по минимуму: 2 CPU и 512 МБ оперативной памяти.</p>
+<figure>
+<img data-src="image/3.png" id="fig:003" style="width:40.0%" alt="Настройки ресурсов системы" /><figcaption aria-hidden="true">Настройки ресурсов системы</figcaption>
+</figure>
+<h2 id="ход-работы-4">Ход работы</h2>
+<p>Данные о системе в данном случае придется настраивать вручную, так как файл образа не используется. Здесь выбираем имя, место хранения, тип ОС - Линукс, подтип - другой, версия - х64.</p>
+<figure>
+<img data-src="image/4.png" id="fig:004" style="width:40.0%" alt="Основные настройки" /><figcaption aria-hidden="true">Основные настройки</figcaption>
+</figure>
+<h2 id="ход-работы-5">Ход работы</h2>
+<p>Для того, чтобы машины видели друг друга в локальной сети, подключим Metasploitable в тот же сегмент NAT, куда уже подключена основная виртуальная машина.</p>
+<figure>
+<img data-src="image/5.png" id="fig:005" style="width:40.0%" alt="Настройки сети" /><figcaption aria-hidden="true">Настройки сети</figcaption>
+</figure>
+<h2 id="ход-работы-6">Ход работы</h2>
+<p>Машина запускается самостоятельно без дополнительных настроек и установки. Логин и пароль по умолчанию совпадают: msfadmin:msfadmin.</p>
+<figure>
+<img data-src="image/6.png" id="fig:006" style="width:40.0%" alt="Запуск Metasploitable" /><figcaption aria-hidden="true">Запуск Metasploitable</figcaption>
+</figure>
+<h2 id="ход-работы-7">Ход работы</h2>
+<p>Для проверки правильности настройки просмотрим адрес сетевого интерфейса машины (должен быть в сегменте 192.168.6.0/24) и попробуем пропинговать рабочую машину с адресом в той же сети 192.168.6.12. Пинг проходит, машины друг друга видят - можно продолжать работу.</p>
+<h2 id="ход-работы-8">Ход работы</h2>
+<figure>
+<img data-src="image/7.png" id="fig:007" style="width:40.0%" alt="Сетевой интерфейс Metasploitable" /><figcaption aria-hidden="true">Сетевой интерфейс Metasploitable</figcaption>
+</figure>
+<figure>
+<img data-src="image/8.png" id="fig:008" style="width:40.0%" alt="Пинг рабочей машины" /><figcaption aria-hidden="true">Пинг рабочей машины</figcaption>
+</figure>
+<h2 id="ход-работы-9">Ход работы</h2>
+<p>На рабочей машине в адресную строку браузера введем адрес Metasploitable: 192.168.6.14. Попадаем на основную страницу, где видим предупреждение никогда не выводить эту машину в сети, которым не доверяем, контакты разработчиков и дефолтные логин и пароль; ниже - ссылки на сервисы, которые встроены в Metasploitable.</p>
+<figure>
+<img data-src="image/9.png" id="fig:009" style="width:40.0%" alt="Основная страница Metasploitable" /><figcaption aria-hidden="true">Основная страница Metasploitable</figcaption>
+</figure>
+<h2 id="ход-работы-10">Ход работы</h2>
+<p>Перейдем на страницу DVWA. Там нас встречает простая форма логина, ниже - логин и пароль по умолчанию (admin:password).</p>
+<figure>
+<img data-src="image/10.png" id="fig:010" style="width:40.0%" alt="login.php DVWA" /><figcaption aria-hidden="true">login.php DVWA</figcaption>
+</figure>
+<h2 id="ход-работы-11">Ход работы</h2>
+<p>Использовав эти данные, мы успешно входим в систему. На первой странице - дисклеймер, предупреждение и общие инструкции. В меню 4 части: основная информация, страницы уязвимостей разных типов, безопасность и информация о машине, выход из системы.</p>
+<figure>
+<img data-src="image/11.png" id="fig:011" style="width:40.0%" alt="Корневая страница DVWA" /><figcaption aria-hidden="true">Корневая страница DVWA</figcaption>
+</figure>
+<h2 id="ход-работы-12">Ход работы</h2>
+<p>Типы уязвимостей будут рассмотрены по ходу работы над проектом далее. Интересно взглянуть на страницу безопасности системы: тут можно выбрать уровень “сложности” машины. По умолчанию - низкий, доступны также средний, высокий и “невозможный”. Последний должен быть примером идеального написания кода.</p>
+<figure>
+<img data-src="image/12.png" id="fig:012" style="width:40.0%" alt="Настройки безопасности" /><figcaption aria-hidden="true">Настройки безопасности</figcaption>
+</figure>
+<h2 id="ход-работы-13">Ход работы</h2>
+<p>Полезным для исследователя является также файл phpinfo, содержащий конфигурацию php и некоторые данные о системе.</p>
+<figure>
+<img data-src="image/13.png" id="fig:013" style="width:40.0%" alt="phpinfo" /><figcaption aria-hidden="true">phpinfo</figcaption>
+</figure>
+<h2 id="ход-работы-14">Ход работы</h2>
+<p>DVWA можно запустить и не используя для этого дополнительную машину, на локальном хосте. Для этого необходимо будет скачать файлы конфигурации и запустить веб-сервер apache.</p>
+</section>
+<section id="выводы" class="slide level1">
+<h1>Выводы</h1>
+<p>Были приобретены практические навыки создания виртуальной машины по виртуальному диску и запуска веб-сервера.</p>
+</section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^4//dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^4//plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+      
+        // Push each slide change to the browser history
+        history: true,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>

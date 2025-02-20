@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Буллер Т.А.">
+  <title>Индивидуальный проект. Этап 3</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/beige.css" id="theme">
+  
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Индивидуальный проект. Этап 3</h1>
+  <p class="subtitle">Использование Hydra</p>
+  <p class="author">Буллер Т.А.</p>
+  <p class="date">17 февраля 2025</p>
+</section>
+
+<section id="информация" class="slide level1">
+<h1>Информация</h1>
+<h2 id="докладчик">Докладчик</h2>
+<ul>
+<li>Буллер Татьяна Александровна</li>
+<li>студент направления Бизнес-информатика</li>
+<li>Российский университет дружбы народов</li>
+</ul>
+</section>
+<section id="вводная-часть" class="slide level1">
+<h1>Вводная часть</h1>
+<h2 id="объект-и-предмет-исследования">Объект и предмет исследования</h2>
+<ul>
+<li>Уязвимость типа bruteforce и ее эксплуатация</li>
+<li>Инструмент перебора паролей Hydra</li>
+<li>Веб-приложение DVWA</li>
+</ul>
+<h2 id="цели-и-задачи">Цели и задачи</h2>
+<ul>
+<li>Знакомство с инструментом перебора паролей Hydra и простейшим вариантом атаки грубой силы (bruteforce)</li>
+</ul>
+<h2 id="материалы-и-методы">Материалы и методы</h2>
+<ul>
+<li>Среда виртуализации VirtualBox</li>
+<li>Виртуальная машина Kali Linux</li>
+<li>Инструментом перебора паролей Hydra</li>
+<li>Веб-приложение DVWA</li>
+</ul>
+</section>
+<section id="ход-работы" class="slide level1">
+<h1>Ход работы</h1>
+<h2 id="ход-работы-1">Ход работы</h2>
+<p>Hydra - инструмент перебора паролей, поддерживающий работу с множеством различных приложений (не только веб-формы, но и другие сервисы, например, ssh и ftp). Используется для перебора по списку пар логин-пароль при аутентификации пользователя в той или иной системе. Такой метод известен как брутфорс - атака грубой силы.</p>
+<h2 id="ход-работы-2">Ход работы</h2>
+<figure>
+<img data-src="image/1.png" id="fig:001" style="width:50.0%" alt="Справка Hydra" /><figcaption aria-hidden="true">Справка Hydra</figcaption>
+</figure>
+<h2 id="ход-работы-3">Ход работы</h2>
+<p>Перейдем на страницу уязвимости Brute Force в DVWA. Страница предлагает форму с двумя полями: username (имя пользователя) и password (пароль). Предположим, что заранее мы не знаем ни одного из компонентов этой пары.</p>
+<h2 id="ход-работы-4">Ход работы</h2>
+<figure>
+<img data-src="image/2.png" id="fig:002" style="width:50.0%" alt="Страница уязвимости Brute Force" /><figcaption aria-hidden="true">Страница уязвимости Brute Force</figcaption>
+</figure>
+<h2 id="ход-работы-5">Ход работы</h2>
+<p>В DVWA мы можем просмотреть исходный код, с помощью которого реализована форма. Это позволяет наглядно видеть, как писать НЕ нужно, и определить вектор или детали осуществления атаки. В случае Brute Force видим, что различаются два варианта развития событий: успешный вход, при котором выводится строка “Welcome…”, и ошибка входа, при которой форма даст ответ “Username and/or password incorrect”. Эти данные пригодятся в дальнейшем для составления команды.</p>
+<h2 id="ход-работы-6">Ход работы</h2>
+<figure>
+<img data-src="image/3.png" id="fig:003" style="width:50.0%" alt="Исходный код страницы" /><figcaption aria-hidden="true">Исходный код страницы</figcaption>
+</figure>
+<h2 id="ход-работы-7">Ход работы</h2>
+<p>Попробуем отправить форму со случайными данными и рассмотрим происходящее в разделе Network инструментов разработчика. Видим, что при отправке формы осуществляется GET-запрос, а введенные данные передаются в открытом виде в адресе запроса. Это делает возможным использование Hydra методом http-get-form без модификации отправляемых пакетов: изменять будем только строку запроса.</p>
+<h2 id="ход-работы-8">Ход работы</h2>
+<figure>
+<img data-src="image/4.png" id="fig:004" style="width:50.0%" alt="GET-запрос" /><figcaption aria-hidden="true">GET-запрос</figcaption>
+</figure>
+<h2 id="ход-работы-9">Ход работы</h2>
+<p>Составим команду для Hydra. Первым делом передаем опцию -L &lt;file&gt;, где &lt;file&gt; - имя файла, в котором перечислены варианты логинов. Можно использовать опцию -l: в таком случае пароли будут перебираться для одного пользователя, а логин можно задать строкой. Следующая опция - -P &lt;file&gt;, где &lt;file&gt; - файл с паролями. Аналогично, опция -p будет пробовать только один пароль. Я использую rockyou.txt, по умолчанию включенный в Kali. rockyou.txt был создан в результате утечки базы данных rockyou, социального приложения и рекламной сети. В результате было раскрыто более 32 миллионов паролей пользователей, хранившихся в открытом виде.</p>
+<h2 id="ход-работы-10">Ход работы</h2>
+<p>В качестве аргумента передадим IP-адрес, на котором запущена DVWA. Далее уточним метод (http-get-form) и передадим строку параметров для составления запроса: “/dvwa/vulnerabilities/brute/:username=^USER^&amp;password=^PASS^&amp;Login=Login:Username and/or password incorrect.:H=Cookie: security=high; security=low; PHPSESSID=(…)”. Здесь выделяем два параметра: ^USER^ и ^PASS^, куда Hydra будет подставлять варианты из переданных ей списков. “Username and/or password incorrect.” - строка в теле ответа сайта, наличие которой говорит о том, что комбинация логин/пароль не подходит, запросы, которые дали такие ответы, Hydra будет отметать. Дополнительный параметр - кука с айди сессии и уровнем безопасности.</p>
+<h2 id="ход-работы-11">Ход работы</h2>
+<figure>
+<img data-src="image/5.png" id="fig:005" style="width:70.0%" alt="Команда для Hydra" /><figcaption aria-hidden="true">Команда для Hydra</figcaption>
+</figure>
+<h2 id="ход-работы-12">Ход работы</h2>
+<p>Спустя некоторое время получаем удачную комбинацию: admin:password. Hydra будет перебирать пароли и дальше (можно задать флаг -F, чтобы после найденной удачной комбинации она закончила перебор), но нам этого результата достаточно. Проверив эту комбинацию на странице, видим, что она действительно работает.</p>
+<figure>
+<img data-src="image/6.png" id="fig:006" style="width:50.0%" alt="Успех подбора пароля" /><figcaption aria-hidden="true">Успех подбора пароля</figcaption>
+</figure>
+<h2 id="ход-работы-13">Ход работы</h2>
+<figure>
+<img data-src="image/7.png" id="fig:007" style="width:50.0%" alt="Успешный “вход”" /><figcaption aria-hidden="true">Успешный “вход”</figcaption>
+</figure>
+</section>
+<section id="выводы" class="slide level1">
+<h1>Выводы</h1>
+<p>Было освноено применение инструмента Hydra для перебора паролей и осуществлена простейшая bruteforce-атака на тестовой машине DVWA.</p>
+</section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^4//dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^4//plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+      
+        // Push each slide change to the browser history
+        history: true,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>

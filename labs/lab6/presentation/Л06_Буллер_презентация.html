@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Буллет Т. А.">
+  <title>Лабораторная работа №6</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/beige.css" id="theme">
+  
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Лабораторная работа №6</h1>
+  <p class="subtitle">Мандатное разграничение прав в Linux</p>
+  <p class="author">Буллет Т. А.</p>
+  <p class="date">15 февраля 2025</p>
+</section>
+
+<section id="информация" class="slide level1">
+<h1>Информация</h1>
+<h2 id="докладчик">Докладчик</h2>
+<div class="columns" data-align="center">
+<div class="column" style="width:70%;">
+<ul>
+<li>Буллер Татьяна Александровна</li>
+<li>студент направления Бизнес-информатика</li>
+<li>Российский университет дружбы народов</li>
+</ul>
+</div><div class="column" style="width:30%;">
+
+</div>
+</div>
+</section>
+<section id="вводная-часть" class="slide level1">
+<h1>Вводная часть</h1>
+<h2 id="объект-и-предмет-исследования">Объект и предмет исследования</h2>
+<ul>
+<li>Операционная система linux, дисрибутив Kali</li>
+<li>Среда виртуализации VirtualBox</li>
+<li>Технология мандатного разграничения прав SELinux</li>
+</ul>
+<h2 id="цели-и-задачи">Цели и задачи</h2>
+<ul>
+<li>Развить навыки администрирования ОС Linux.</li>
+<li>Получить первое практическое знакомство с технологией SELinux1.</li>
+<li>Проверить работу SELinx на практике совместно с веб-сервером Apache.</li>
+</ul>
+<h2 id="материалы-и-методы">Материалы и методы</h2>
+<ul>
+<li>Процессор <code>pandoc</code> для входного формата Markdown</li>
+<li>Среда виртуализации VirtualBox</li>
+<li>SELinux</li>
+<li>Apache2</li>
+</ul>
+</section>
+<section id="выполнение-лабораторной-работы" class="slide level1">
+<h1>Выполнение лабораторной работы</h1>
+<p>Войдем в систему с полученными учётными данными и убедимся, что SELinux работает в режиме enforcing политики targeted с помощью команд getenforce и sestatus.</p>
+<figure>
+<img data-src="image/1.png" id="fig:001" style="width:40.0%" alt="sestatus" /><figcaption aria-hidden="true">sestatus</figcaption>
+</figure>
+<p>Предварительно запустив сервис apache2, проверим, работает ли httpd.</p>
+<figure>
+<img data-src="image/2.png" id="fig:002" style="width:40.0%" alt="httpd" /><figcaption aria-hidden="true">httpd</figcaption>
+</figure>
+<h2 id="выполнение-лабораторной-работы-1">Выполнение лабораторной работы</h2>
+<p>Далее с помощью команды ‘ps auxZ | grep httpd’ определим контекст безопасности веб-сервера Apache. Строка unconfined говорит о том, что никакие дополнительные ограничения не установлены.</p>
+<figure>
+<img data-src="image/3.png" id="fig:003" style="width:40.0%" alt="Контекст безопасности веб-сервера Apache" /><figcaption aria-hidden="true">Контекст безопасности веб-сервера Apache</figcaption>
+</figure>
+<h2 id="выполнение-лабораторной-работы-2">Выполнение лабораторной работы</h2>
+<p>Посмотрим текущее состояние переключателей SELinux для Apache с помощью команды sestatus ‘-b | grep httpd’. Видим настройки по умолчанию: все переключатели разрешений для httpd в режиме off.</p>
+<figure>
+<img data-src="image/4.png" id="fig:004" style="width:40.0%" alt="sestatus" /><figcaption aria-hidden="true">sestatus</figcaption>
+</figure>
+<h2 id="выполнение-лабораторной-работы-3">Выполнение лабораторной работы</h2>
+<p>Команда seinfo позволяет просмотреть статистику по политике. Видим 3983 типа, 9 пользователей и 15 ролей.</p>
+<figure>
+<img data-src="image/5.png" id="fig:005" style="width:40.0%" alt="seinfo" /><figcaption aria-hidden="true">seinfo</figcaption>
+</figure>
+<h2 id="выполнение-лабораторной-работы-4">Выполнение лабораторной работы</h2>
+<p>Командой ls -lZ определим типы файлов, находящихся в директории /var/www и то же самое для /var/www/html. Видим, что для всех файлов и поддиректорий установлены права, позволяющие только владельцу (суперпользователю) осуществлять запись в них, потому дальнейшую работу необходимо будет вести через sudo.</p>
+<figure>
+<img data-src="image/6.png" id="fig:006" style="width:40.0%" alt="Типы файлов, находящихся в директории /var/www" /><figcaption aria-hidden="true">Типы файлов, находящихся в директории /var/www</figcaption>
+</figure>
+<h2 id="выполнение-лабораторной-работы-5">Выполнение лабораторной работы</h2>
+<p>От имени суперпользователя пишем в директории /var/www/html короткий файл test.html, при компиляции которого на экран будет выведено только слово test. Этот файл должен быть доступен по адресу 127.0.0.1/test.html, так как на машине запущен сервис apache. Перейдя по адресу и не указывая имя файла мы встретим приветственную страницу apache (it works!), далее, уточнив имя файла test.html, увидим вывод созданного нами файла.</p>
+<figure>
+<img data-src="image/7.png" id="fig:007" style="width:40.0%" alt="test.html" /><figcaption aria-hidden="true">test.html</figcaption>
+</figure>
+<h2 id="выполнение-лабораторной-работы-6">Выполнение лабораторной работы</h2>
+<p>В контексте созданного файла, который проверим снова командой ls -lZ, встречаем строку unconfined_u - свободный пользователь, роль object_r используемая по умолчанию для файлов на «постоянных» носителях и на сетевых файловых системах, и тип httpd_sys_content_t, позволяющий процессу httpd получить доступ к этому файлу.</p>
+<figure>
+<img data-src="image/8.png" id="fig:008" style="width:40.0%" alt="Контекст test.html" /><figcaption aria-hidden="true">Контекст test.html</figcaption>
+</figure>
+<h2 id="выполнение-лабораторной-работы-7">Выполнение лабораторной работы</h2>
+<p>Теперь командой chcon -t samba_share_t /var/www/html/test.html изменим контекст файла. Теперь процесс samba может получить доступ к файлу, а httpd - нет, поэтому при повторной попытке получить файл через браузер мы столкнемся с ошибкой. Соответствующее предупреждение можем видеть и в системных логах.</p>
+<figure>
+<img data-src="image/9.png" id="fig:009" style="width:40.0%" alt="Изменение контекста файла" /><figcaption aria-hidden="true">Изменение контекста файла</figcaption>
+</figure>
+<figure>
+<img data-src="image/10.png" id="fig:010" style="width:40.0%" alt="Сообщение об ошибке из системного лога" /><figcaption aria-hidden="true">Сообщение об ошибке из системного лога</figcaption>
+</figure>
+<h2 id="выполнение-лабораторной-работы-8">Выполнение лабораторной работы</h2>
+<p>Перезапустим веб-сервер на прослушивание TCP порта 81 вместо 80, стоящего по умолчанию. Для этого в файле /etc/apache/port.conf заменим строчку Listen 80 на Listen 81. При попытке перезапустить сервер после внесенных изменений, однако, снова столкнемся с ошибкой, потому что в конфигурацию SELinux соответствующие разрешения и изменения внесены не были.</p>
+<figure>
+<img data-src="image/11.png" id="fig:011" style="width:40.0%" alt="Перевод сервера на прослушивание другого порта" /><figcaption aria-hidden="true">Перевод сервера на прослушивание другого порта</figcaption>
+</figure>
+<h2 id="выполнение-лабораторной-работы-9">Выполнение лабораторной работы</h2>
+<p>Следующим шагом выполним semanage port -a -t http_port_t -р tcp 81. Эта команда внесет порт 81 в список доступных для сервиса httpd, в чем далее мы можем убедиться командой semanage port -l | grep 81. При попытке теперь запустить веб-сервер ошибок не возникнет.</p>
+<figure>
+<img data-src="image/12.png" id="fig:012" style="width:40.0%" alt="Добавленный в конфигурацию порт" /><figcaption aria-hidden="true">Добавленный в конфигурацию порт</figcaption>
+</figure>
+<h2 id="выполнение-лабораторной-работы-10">Выполнение лабораторной работы</h2>
+<p>В завершение работы вернем систему к настройкам по умолчанию: удалим созданный файл и добавленные контексты, а также выключим сервис apache.</p>
+<figure>
+<img data-src="image/13.png" id="fig:013" style="width:40.0%" alt="Завершение работы" /><figcaption aria-hidden="true">Завершение работы</figcaption>
+</figure>
+</section>
+<section id="выводы" class="slide level1">
+<h1>Выводы</h1>
+<p>Получено первое практическое знакомство с технологией SELinux. Проверена работу SELinx на практике совместно с веб-сервером Apache.</p>
+</section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^4//dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^4//plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+      
+        // Push each slide change to the browser history
+        history: true,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>

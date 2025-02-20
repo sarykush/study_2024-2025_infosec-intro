@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Буллет Т. А.">
+  <title>Лабораторная работа №3</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/beige.css" id="theme">
+  
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Лабораторная работа №3</h1>
+  <p class="subtitle">Дискреционное разграничение прав в Linux. Два пользователя.</p>
+  <p class="author">Буллет Т. А.</p>
+  <p class="date">14 февраля 2025</p>
+</section>
+
+<section id="информация" class="slide level1">
+<h1>Информация</h1>
+<h2 id="докладчик">Докладчик</h2>
+<div class="columns" data-align="center">
+<div class="column" style="width:70%;">
+<ul>
+<li>Буллер Татьяна Александровна</li>
+<li>студент направления Бизнес-информатика</li>
+<li>Российский университет дружбы народов</li>
+</ul>
+</div><div class="column" style="width:30%;">
+
+</div>
+</div>
+</section>
+<section id="вводная-часть" class="slide level1">
+<h1>Вводная часть</h1>
+<h2 id="объект-и-предмет-исследования">Объект и предмет исследования</h2>
+<ul>
+<li>Операционная система linux, дисрибутив Rocky</li>
+<li>Среда виртуализации VirtualBox</li>
+</ul>
+<h2 id="цели-и-задачи">Цели и задачи</h2>
+<ul>
+<li>Получение практических навыков работы в консоли с атрибутами файлов для групп пользователей.</li>
+</ul>
+<h2 id="материалы-и-методы">Материалы и методы</h2>
+<ul>
+<li>Процессор <code>pandoc</code> для входного формата Markdown</li>
+<li>Среда виртуализации VirtualBox</li>
+</ul>
+</section>
+<section id="выполнение-лабораторной-работы" class="slide level1">
+<h1>Выполнение лабораторной работы</h1>
+<h2 id="создание-пользователей">Создание пользователей</h2>
+<p>Для создания пользоваталей используем команду useradd с опцией -m, чтобы вместе с пользователем создать его домашнюю директорию и в дальнейшем иметь возможность зайти на рабочий стол под этой учетной записью. Далее задаем пароль для пользователя, который необходимо подтвердить, введя повторно.</p>
+<figure>
+<img data-src="image/1.png" id="fig:001" style="width:70.0%" alt="Создание пользователей" /><figcaption aria-hidden="true">Создание пользователей</figcaption>
+</figure>
+<h2 id="создание-пользователей-1">Создание пользователей</h2>
+<p>Добавим пользователя guest2 в группу пользователя guest:</p>
+<figure>
+<img data-src="image/2.png" id="fig:002" style="width:70.0%" alt="Добавление пользователя в группу" /><figcaption aria-hidden="true">Добавление пользователя в группу</figcaption>
+</figure>
+<h2 id="вход-в-систему-от-имени-созданного-пользователя">Вход в систему от имени созданного пользователя</h2>
+<p>С помощью команды su guest получаем неинтерактивную оболочку пользователя и переводим ее в интерактивную: в таком виде с ней удобнее работать. Команда pwd помогает определить, что в данный момент мы находимся в домашней директории созданного ранее пользователя.</p>
+<figure>
+<img data-src="image/3.png" id="fig:003" style="width:70.0%" alt="Вход в систему и рабочая директория" /><figcaption aria-hidden="true">Вход в систему и рабочая директория</figcaption>
+</figure>
+<h2 id="вход-в-систему-от-имени-созданного-пользователя-1">Вход в систему от имени созданного пользователя</h2>
+<p>С помощью команды id выясним группы основного пользователя (tabuller). Видим, что кроме собственной группы этот пользователь также добавлен в группу суперпользователей sudo (27). Похожую информацию мы можем получить из вывода файла /etc/group.</p>
+<h2 id="вход-в-систему-от-имени-созданного-пользователя-2">Вход в систему от имени созданного пользователя</h2>
+<figure>
+<img data-src="image/31.png" id="fig:004" style="width:70.0%" alt="Группы основного пользователя" /><figcaption aria-hidden="true">Группы основного пользователя</figcaption>
+</figure>
+<figure>
+<img data-src="image/51.png" id="fig:005" style="width:70.0%" alt="/etc/group" /><figcaption aria-hidden="true">/etc/group</figcaption>
+</figure>
+<h2 id="пользователь-в-системе">Пользователь в системе</h2>
+<p>Изменим права на директорию, созданную ранее, на 010. Это значит, что теперь только члены группы владельца файла (но не он сам) имеют право на запуск файлов.</p>
+<figure>
+<img data-src="image/4.png" id="fig:006" style="width:70.0%" alt="Изменение прав на директорию" /><figcaption aria-hidden="true">Изменение прав на директорию</figcaption>
+</figure>
+<h2 id="пользователь-в-системе-1">Пользователь в системе</h2>
+<p>Далее, меняя атрибуты директории и файла в ней заполним таблицу. Сравнивая ее с таблицей из предыдущей лабораторной работы мы можем наблюдать значительное сходство. Необходимо, однако, учитывать, что до этого мы говорили о доступности файлов и директорий только для владельца, теперь же говорим о доступности только для группы владельца (исключая его самого).</p>
+</section>
+<section id="выводы" class="slide level1">
+<h1>Выводы</h1>
+<p>Получены практические навыки работы в консоли с атрибутами файлов для групп пользователей.</p>
+</section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^4//dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^4//plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+      
+        // Push each slide change to the browser history
+        history: true,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>

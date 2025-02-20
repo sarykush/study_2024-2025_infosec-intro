@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Буллер Т.А.">
+  <title>Индивидуальный проект. Этап 1</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/beige.css" id="theme">
+  
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Индивидуальный проект. Этап 1</h1>
+  <p class="subtitle">Установка Kali Linux</p>
+  <p class="author">Буллер Т.А.</p>
+  <p class="date">20 февраля 2025</p>
+</section>
+
+<section id="информация" class="slide level1">
+<h1>Информация</h1>
+<h2 id="докладчик">Докладчик</h2>
+<ul>
+<li>Буллер Татьяна Александровна</li>
+<li>студент направления Бизнес-информатика</li>
+<li>Российский университет дружбы народов</li>
+</ul>
+</section>
+<section id="вводная-часть" class="slide level1">
+<h1>Вводная часть</h1>
+<h2 id="объект-и-предмет-исследования">Объект и предмет исследования</h2>
+<ul>
+<li>Операционная система linux, дисрибутив Kali</li>
+<li>Среда виртуализации VirtualBox</li>
+</ul>
+<h2 id="цели-и-задачи">Цели и задачи</h2>
+<ul>
+<li>Приобретение практических навыков установки операционной системы на виртуальную машину</li>
+<li>Приобретение навыков настройки минимально необходимых для дальнейшей работы сервисов</li>
+</ul>
+<h2 id="материалы-и-методы">Материалы и методы</h2>
+<ul>
+<li>Процессор <code>pandoc</code> для входного формата Markdown</li>
+<li>Среда виртуализации VirtualBox</li>
+</ul>
+</section>
+<section id="ход-работы" class="slide level1">
+<h1>Ход работы</h1>
+<h2 id="ход-работы-1">Ход работы</h2>
+<p>Создание виртуальной машины дистрибутива Kali аналогично созданию машины дистрибутива Rocky, рассмотренному ранее в лабораторных работах. Первый этап - выбор названия для машины, места хранения и файла образа, с которого будет установлена операционная система.</p>
+<figure>
+<img data-src="image/1.png" id="fig:001" style="width:40.0%" alt="Основные настройки" /><figcaption aria-hidden="true">Основные настройки</figcaption>
+</figure>
+<h2 id="ход-работы-2">Ход работы</h2>
+<p>Железа и места на диске оставим минимально рекомендуемое. Этого хватит, чтобы запустить машину и использовать ее стандартные функции; для работы с расширенным инструментарием я использую другую машину того же дистрибутива, установленную ранее самостоятельно.</p>
+<h2 id="ход-работы-3">Ход работы</h2>
+<figure>
+<img data-src="image/2.png" id="fig:002" style="width:40.0%" alt="Настройки ресурсов системы" /><figcaption aria-hidden="true">Настройки ресурсов системы</figcaption>
+</figure>
+<figure>
+<img data-src="image/3.png" id="fig:003" style="width:40.0%" alt="Настройки диска" /><figcaption aria-hidden="true">Настройки диска</figcaption>
+</figure>
+<h2 id="ход-работы-4">Ход работы</h2>
+<p>Первое, что необходимо выбрать при установке - язык процесса установки и дефолтный язык системы. По умолчанию предлагается английский.</p>
+<figure>
+<img data-src="image/4.png" id="fig:004" style="width:40.0%" alt="Выбор языка системы" /><figcaption aria-hidden="true">Выбор языка системы</figcaption>
+</figure>
+<h2 id="ход-работы-5">Ход работы</h2>
+<p>Далее установщик просит выбрать местонахождение. В дальнейшем эта информация будет использована для выбора часового пояса. Вариант по умолчанию - Соединенные Штаты.</p>
+<figure>
+<img data-src="image/5.png" id="fig:005" style="width:40.0%" alt="Выбор локации" /><figcaption aria-hidden="true">Выбор локации</figcaption>
+</figure>
+<h2 id="ход-работы-6">Ход работы</h2>
+<p>Далее, отдельно от выбора языка системы, предлагается выбрать раскладку клавиатуры, которая будет для системы основной.</p>
+<figure>
+<img data-src="image/6.png" id="fig:006" style="width:40.0%" alt="Выбор раскладки клавиатуры" /><figcaption aria-hidden="true">Выбор раскладки клавиатуры</figcaption>
+</figure>
+<h2 id="ход-работы-7">Ход работы</h2>
+<p>Следующий этап - конфигурация сети. Здесь необходимо выбрать имя хоста, доменное имя и создать пользователя. Имя хоста - доменное имя второго уровня, доменное имя - домен первого уровня (&lt;hostname&gt;.&lt;domainname&gt;).</p>
+<h2 id="ход-работы-8">Ход работы</h2>
+<figure>
+<img data-src="image/7.png" id="fig:007" style="width:40.0%" alt="Выбор домена второго уровня" /><figcaption aria-hidden="true">Выбор домена второго уровня</figcaption>
+</figure>
+<figure>
+<img data-src="image/8.png" id="fig:008" style="width:40.0%" alt="Выбор домена первого уровня" /><figcaption aria-hidden="true">Выбор домена первого уровня</figcaption>
+</figure>
+<h2 id="ход-работы-9">Ход работы</h2>
+<p>Создание пользователя так же проходит в несколько этапов. Для начала установщик просит ввести полное имя, затем - логин (который в том числе и сам предлагает на основе введенного полного имени) и пароль, который необходимо подтвердить дважды.</p>
+<h2 id="ход-работы-10">Ход работы</h2>
+<figure>
+<img data-src="image/9.png" id="fig:009" style="width:40.0%" alt="Выбор логина" /><figcaption aria-hidden="true">Выбор логина</figcaption>
+</figure>
+<figure>
+<img data-src="image/10.png" id="fig:010" style="width:40.0%" alt="Выбор пароля" /><figcaption aria-hidden="true">Выбор пароля</figcaption>
+</figure>
+<h2 id="ход-работы-11">Ход работы</h2>
+<p>Выбор часовой зоны (времени в системе) строится на выбранной ранее локации и предлагает варианты, исходя из страны проживания пользователя.</p>
+<figure>
+<img data-src="image/11.png" id="fig:011" style="width:40.0%" alt="Выбор времени системы" /><figcaption aria-hidden="true">Выбор времени системы</figcaption>
+</figure>
+<h2 id="ход-работы-12">Ход работы</h2>
+<p>Предпоследний этап установки - настройка диска и его разделов. Система предлагает использовать диск целиком или создать в дополнение к нему LVM, который может быть зашифрован по желанию. При разделении диска можно также выбрать использование целого диска, выделение /home в отдельный раздел или то же самое для трех директорий: /home, /tmp и /var.</p>
+<figure>
+<img data-src="image/12.png" id="fig:012" style="width:40.0%" alt="Этап настройки диска" /><figcaption aria-hidden="true">Этап настройки диска</figcaption>
+</figure>
+<h2 id="ход-работы-13">Ход работы</h2>
+<p>Последний этап - выбор дополнительного ПО. Kali предлагает установить дефолтное окружение, среду рабочего стола, коллекцию наиболее часто используемых инструментов, 10 самых частоиспользуемых инструментов и рекомендованные. Далее по желанию можно установить загрузчик GRUB.</p>
+<h2 id="ход-работы-14">Ход работы</h2>
+<figure>
+<img data-src="image/13.png" id="fig:013" style="width:40.0%" alt="Выбор дополнительного ПО" /><figcaption aria-hidden="true">Выбор дополнительного ПО</figcaption>
+</figure>
+<figure>
+<img data-src="image/14.png" id="fig:014" style="width:40.0%" alt="GRUB" /><figcaption aria-hidden="true">GRUB</figcaption>
+</figure>
+<h2 id="ход-работы-15">Ход работы</h2>
+<p>После описанных выше настроек машина готова к работе. Она автоматически перезагружается и выводит на вход.</p>
+<figure>
+<img data-src="image/15.png" id="fig:015" style="width:40.0%" alt="Вход в систему" /><figcaption aria-hidden="true">Вход в систему</figcaption>
+</figure>
+<h2 id="ход-работы-16">Ход работы</h2>
+<figure>
+<img data-src="image/16.png" id="fig:016" style="width:40.0%" alt="Рабочий стол" /><figcaption aria-hidden="true">Рабочий стол</figcaption>
+</figure>
+</section>
+<section id="выводы" class="slide level1">
+<h1>Выводы</h1>
+<p>Были приобретены практические навыки установки операционной системы на виртуальную машину и настройки минимально необходимых для дальнейшей работы сервисов.</p>
+</section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^4//dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^4//plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+      
+        // Push each slide change to the browser history
+        history: true,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>

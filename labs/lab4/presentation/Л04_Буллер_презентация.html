@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Буллет Т. А.">
+  <title>Лабораторная работа №4</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/beige.css" id="theme">
+  
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Лабораторная работа №4</h1>
+  <p class="subtitle">Дискреционное разграничение прав в Linux. Расширенные атрибуты</p>
+  <p class="author">Буллет Т. А.</p>
+  <p class="date">15 февраля 2025</p>
+</section>
+
+<section id="информация" class="slide level1">
+<h1>Информация</h1>
+<h2 id="докладчик">Докладчик</h2>
+<div class="columns" data-align="center">
+<div class="column" style="width:70%;">
+<ul>
+<li>Буллер Татьяна Александровна</li>
+<li>студент направления Бизнес-информатика</li>
+<li>Российский университет дружбы народов</li>
+</ul>
+</div><div class="column" style="width:30%;">
+
+</div>
+</div>
+</section>
+<section id="вводная-часть" class="slide level1">
+<h1>Вводная часть</h1>
+<h2 id="объект-и-предмет-исследования">Объект и предмет исследования</h2>
+<ul>
+<li>Операционная система linux, дисрибутив Rocky</li>
+<li>Среда виртуализации VirtualBox</li>
+</ul>
+<h2 id="цели-и-задачи">Цели и задачи</h2>
+<ul>
+<li>Получение практических навыков работы в консоли с расширенными атрибутами файлов.</li>
+</ul>
+<h2 id="материалы-и-методы">Материалы и методы</h2>
+<ul>
+<li>Процессор <code>pandoc</code> для входного формата Markdown</li>
+<li>Среда виртуализации VirtualBox</li>
+</ul>
+</section>
+<section id="выполнение-лабораторной-работы" class="slide level1">
+<h1>Выполнение лабораторной работы</h1>
+<h2 id="предварительная-настройка">Предварительная настройка</h2>
+<p>От имени созданного ранее пользователя командой lsattr просмотрим атрибуты файла file, находящегося в директории dir1. Видим, что файлу присвоен только один аттрибут: e.</p>
+<figure>
+<img data-src="image/5.png" id="fig:001" style="width:70.0%" alt="Атрибуты файла file" /><figcaption aria-hidden="true">Атрибуты файла file</figcaption>
+</figure>
+<h2 id="предварительная-настройка-1">Предварительная настройка</h2>
+<p>Установим командой chmod 600 на файл права, позволяющие только владельцу читать и записывать данные в файл (но не исполнять). При попытке изменить атрибут у файла от имени того же пользователя получим ошибку: операция не разрешена.</p>
+<figure>
+<img data-src="image/6.png" id="fig:002" style="width:70.0%" alt="Изменение атрибутов файла" /><figcaption aria-hidden="true">Изменение атрибутов файла</figcaption>
+</figure>
+<h2 id="предварительная-настройка-2">Предварительная настройка</h2>
+<p>При этом, воспользовавшись учетной записью пользователя из группы sudo, мы без проблем выполним эту операцию.</p>
+<figure>
+<img data-src="image/7.png" id="fig:003" style="width:70.0%" alt="Изменение атрибутов файла от имени пользователя sudo" /><figcaption aria-hidden="true">Изменение атрибутов файла от имени пользователя sudo</figcaption>
+</figure>
+<h2 id="предварительная-настройка-3">Предварительная настройка</h2>
+<p>От имени пользователя guest проверим правильность установки атрибутов все той же командой lsattr. Видим, что появился дополнительный атрибут а, предыдущий тоже остался на месте.</p>
+<figure>
+<img data-src="image/8.png" id="fig:004" style="width:70.0%" alt="Измененные атрибуты файла" /><figcaption aria-hidden="true">Измененные атрибуты файла</figcaption>
+</figure>
+<h2 id="работа-с-измененными-атрибутами">Работа с измененными атрибутами</h2>
+<p>При попытке выполнить команду ‘echo “test” /home/guest/dir1/file1’ мы получим объединение строк test и /home/guest/dir1/file1, но не дозапись слова test в выбранный файл. Для того, чтобы перенаправить вывод команды echo в файл, необходимо использовать &gt; (перезапись) или &gt;&gt; (дозапись). С измененными атрибутами дозапись в файл и его чтение можно осуществить без проблем, при этом перезапись и переименование и изменение прав недоступны.</p>
+<figure>
+<img data-src="image/9.png" id="fig:005" style="width:40.0%" alt="Работа с файлом" /><figcaption aria-hidden="true">Работа с файлом</figcaption>
+</figure>
+<h2 id="работа-с-измененными-атрибутами-1">Работа с измененными атрибутами</h2>
+<p>Командой chattr -a снимем с файла атрибут, установленный ранее. Теперь уже перезапись файла и его переименование становятся доступны.</p>
+<figure>
+<img data-src="image/10.png" id="fig:006" style="width:70.0%" alt="Снятие атрибута" /><figcaption aria-hidden="true">Снятие атрибута</figcaption>
+</figure>
+<h2 id="работа-с-измененными-атрибутами-2">Работа с измененными атрибутами</h2>
+<p>Заменим атрибут ‘а’ атрибутом ‘i’. Мы все еще можем прочитать файл в директории, однако перезапись, дозапись и переименование уже становятся недоступны. В этом “режиме” файл становится неуязвим: не может быть изменён, удалён или переименован.</p>
+<figure>
+<img data-src="image/11.png" id="fig:007" style="width:40.0%" alt="godmode" /><figcaption aria-hidden="true">godmode</figcaption>
+</figure>
+</section>
+<section id="выводы" class="slide level1">
+<h1>Выводы</h1>
+<p>В результате выполнения работы были повышены навыки использования интерфейса командой строки (CLI), освоено на примерах то, как используются основные и расширенные атрибуты при разграничении доступа. Связана теория дискреционного разделения доступа с её реализацией на практике в ОС Linux. Опробовано действие на практике расширенных атрибутов «а» и «i».</p>
+</section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^4//dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^4//plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+      
+        // Push each slide change to the browser history
+        history: true,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Буллер Т.А.">
+  <title>Индивидуальный проект. Этап 4</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/beige.css" id="theme">
+  
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Индивидуальный проект. Этап 4</h1>
+  <p class="subtitle">Использование nikto</p>
+  <p class="author">Буллер Т.А.</p>
+  <p class="date">17 февраля 2025</p>
+</section>
+
+<section id="информация" class="slide level1">
+<h1>Информация</h1>
+<h2 id="докладчик">Докладчик</h2>
+<ul>
+<li>Буллер Татьяна Александровна</li>
+<li>студент направления Бизнес-информатика</li>
+<li>Российский университет дружбы народов</li>
+</ul>
+</section>
+<section id="вводная-часть" class="slide level1">
+<h1>Вводная часть</h1>
+<h2 id="объект-и-предмет-исследования">Объект и предмет исследования</h2>
+<ul>
+<li>Cканер уязвимостей nikto</li>
+<li>Веб-приложение DVWA</li>
+</ul>
+<h2 id="цели-и-задачи">Цели и задачи</h2>
+<ul>
+<li>Знакомство со сканером уязвимостей nikto и тестирование его возможностей на примере DVWA.</li>
+</ul>
+<h2 id="материалы-и-методы">Материалы и методы</h2>
+<ul>
+<li>Среда виртуализации VirtualBox</li>
+<li>Виртуальная машина Kali Linux</li>
+<li>Cканер уязвимостей nikto</li>
+<li>Веб-приложение DVWA</li>
+</ul>
+</section>
+<section id="ход-работы" class="slide level1">
+<h1>Ход работы</h1>
+<h2 id="ход-работы-1">Ход работы</h2>
+<p>nikto — базовый сканер безопасности веб-сервера. Он сканирует и обнаруживает уязвимости в веб-приложениях, обычно вызванные неправильной конфигурацией на самом сервере, файлами, установленными по умолчанию, и небезопасными файлами, а также устаревшими серверными приложениями.</p>
+<h2 id="ход-работы-2">Ход работы</h2>
+<figure>
+<img data-src="image/1.png" id="fig:001" style="width:40.0%" alt="Справка nikto" /><figcaption aria-hidden="true">Справка nikto</figcaption>
+</figure>
+<p>Основной параметр, который необходимо задать для nikto - -host, который принимает на вход адрес конкретной страницы либо машины. Для начала передадим адрес основной страницы DVWA и попробуем проанализировать вывод.</p>
+<h2 id="ход-работы-3">Ход работы</h2>
+<figure>
+<img data-src="image/2.png" id="fig:002" style="width:40.0%" alt="Анализ основной страницы DVWA с помощью nikto" /><figcaption aria-hidden="true">Анализ основной страницы DVWA с помощью nikto</figcaption>
+</figure>
+<h2 id="ход-работы-4">Ход работы</h2>
+<p>Видим, что nikto сразу определил версию веб-сервера Apache, на котором запущена страница, используемую версию php и отсутствующие заголовки в теле запроса, отсутствие которых позволяет так или иначе манипулировать страницей. Далее по отчету видим список HTTP-методов, которые принимает страница. Сканер обнаружил также файлы конфигурации php, страницу входа, лог изменений. Всегда следует обращать внимание на устаревшие версии тех или иных сервисов, так как нередки случаи того, что в них присутствуют доступные для эксплуатации уязвимости. Так, здесь nikto обращает внимание на устаревшую версию Apache и данные из лога изменений, из которых следует, что страница уязвима к SQLi.</p>
+<h2 id="ход-работы-5">Ход работы</h2>
+<p>Кроме этого, сканер обнаруживает директории, ссылок на которые нет на главной странице DVWA. Это, например, директория /config, содержание которой, судя по названию, может представлять интерес для исследователя.</p>
+<figure>
+<img data-src="image/3.png" id="fig:003" style="width:40.0%" alt="Директория /config" /><figcaption aria-hidden="true">Директория /config</figcaption>
+</figure>
+<h2 id="ход-работы-6">Ход работы</h2>
+<p>Эта директория содержит единственный файл и перенаправление в корень - страницу, на которой мы были до этого. Открыв файл, лежащий в этой директории, мы не увидим никакого вывода, пока не добавим в конец адреса знак тильды. Действительно, этот файл хранит некоторые детали конфигурации базы данных:</p>
+<figure>
+<img data-src="image/4.png" id="fig:004" style="width:40.0%" alt="config.inc.php" /><figcaption aria-hidden="true">config.inc.php</figcaption>
+</figure>
+<h2 id="ход-работы-7">Ход работы</h2>
+<p>Кроме файла конфигурации nikto нашел еще и директорию /docs, где, судя по названию, хранится некоторая документация. И действительно - внутри находим .pdf файл с документацией DVWA.</p>
+<figure>
+<img data-src="image/5.png" id="fig:005" style="width:40.0%" alt="Директория /docs" /><figcaption aria-hidden="true">Директория /docs</figcaption>
+</figure>
+<h2 id="ход-работы-8">Ход работы</h2>
+<figure>
+<img data-src="image/6.png" id="fig:006" style="width:40.0%" alt="Файл документации" /><figcaption aria-hidden="true">Файл документации</figcaption>
+</figure>
+<h2 id="ход-работы-9">Ход работы</h2>
+<p>Сканер также обращает внимание исследователя на то, что страница отвечает на запрос с параметром ?-s, возвращая исходный код. Это может быть крайне полезно в дальнейшем исследовании уязвимостей.</p>
+<figure>
+<img data-src="image/7.png" id="fig:007" style="width:30.0%" alt="Возвращение исходного кода страницы" /><figcaption aria-hidden="true">Возвращение исходного кода страницы</figcaption>
+</figure>
+<h2 id="ход-работы-10">Ход работы</h2>
+<p>Теперь попробуем просканировать страницу одной из уязвимостей. Кроме информации, аналогичной прошлому выводу, nikto обнаружил отдельные страницы с исходным кодом и помощью, которые, по его мнению, не должны быть доступны.</p>
+<h2 id="ход-работы-11">Ход работы</h2>
+<figure>
+<img data-src="image/8.png" id="fig:008" style="width:70.0%" alt="Отчет по сканированию страницы уязвимости" /><figcaption aria-hidden="true">Отчет по сканированию страницы уязвимости</figcaption>
+</figure>
+</section>
+<section id="выводы" class="slide level1">
+<h1>Выводы</h1>
+<p>Было освноено применение сканера уязвимостей nikto и протестированы его возможности на примере заведомо уязвимой страницы DVWA.</p>
+</section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^4//dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^4//plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+      
+        // Push each slide change to the browser history
+        history: true,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>

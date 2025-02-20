@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Буллет Т. А.">
+  <title>Лабораторная работа №5</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/beige.css" id="theme">
+  
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Лабораторная работа №5</h1>
+  <p class="subtitle">Дискреционное разграничение прав в Linux. Исследование влияния дополнительных атрибутов</p>
+  <p class="author">Буллет Т. А.</p>
+  <p class="date">15 февраля 2025</p>
+</section>
+
+<section id="информация" class="slide level1">
+<h1>Информация</h1>
+<h2 id="докладчик">Докладчик</h2>
+<div class="columns" data-align="center">
+<div class="column" style="width:70%;">
+<ul>
+<li>Буллер Татьяна Александровна</li>
+<li>студент направления Бизнес-информатика</li>
+<li>Российский университет дружбы народов</li>
+</ul>
+</div><div class="column" style="width:30%;">
+
+</div>
+</div>
+</section>
+<section id="вводная-часть" class="slide level1">
+<h1>Вводная часть</h1>
+<h2 id="объект-и-предмет-исследования">Объект и предмет исследования</h2>
+<ul>
+<li>Операционная система linux, дисрибутив Rocky</li>
+<li>Среда виртуализации VirtualBox</li>
+</ul>
+<h2 id="цели-и-задачи">Цели и задачи</h2>
+<ul>
+<li>Изучение механизмов изменения идентификаторов, применения SetUID- и Sticky-битов.</li>
+<li>Получение практических навыков работы в консоли с дополнительными атрибутами.</li>
+<li>Рассмотрение работы механизма смены идентификатора процессов пользователей, а также влияние бита Sticky на запись и удаление файлов.</li>
+</ul>
+<h2 id="материалы-и-методы">Материалы и методы</h2>
+<ul>
+<li>Процессор <code>pandoc</code> для входного формата Markdown</li>
+<li>Среда виртуализации VirtualBox</li>
+</ul>
+</section>
+<section id="выполнение-лабораторной-работы" class="slide level1">
+<h1>Выполнение лабораторной работы</h1>
+<h2 id="компилирование-программ">Компилирование программ</h2>
+<p>Создадим программу simpleid.c. Эта программа с помощью функций geteuid и getegid получает uid и gid пользователя соответственно, после чего выводит их на экран.</p>
+<figure>
+<img data-src="image/1.png" id="fig:001" style="width:70.0%" alt="simpleid.c" /><figcaption aria-hidden="true">simpleid.c</figcaption>
+</figure>
+<h2 id="компилирование-программ-1">Компилирование программ</h2>
+<p>Скомпилировав программу, получим вывод, в значениях совпадающий с выводом команды id.</p>
+<figure>
+<img data-src="image/2.png" id="fig:002" style="width:70.0%" alt="Скомпилированная программа" /><figcaption aria-hidden="true">Скомпилированная программа</figcaption>
+</figure>
+<figure>
+<img data-src="image/3.png" id="fig:003" style="width:70.0%" alt="simpleid и id" /><figcaption aria-hidden="true">simpleid и id</figcaption>
+</figure>
+<h2 id="компилирование-программ-2">Компилирование программ</h2>
+<p>После этого усложним программу, как показано на скриншоте:</p>
+<figure>
+<img data-src="image/4.png" id="fig:004" style="width:70.0%" alt="simpleid2" /><figcaption aria-hidden="true">simpleid2</figcaption>
+</figure>
+<h2 id="компилирование-программ-3">Компилирование программ</h2>
+<p>Теперь вывод дополнен и все еще совпадает с выводом id.</p>
+<figure>
+<img data-src="image/5.png" id="fig:005" style="width:70.0%" alt="Дополненный вывод" /><figcaption aria-hidden="true">Дополненный вывод</figcaption>
+</figure>
+<h2 id="исследование-suid-бита">Исследование SUID-бита</h2>
+<p>Следующим шагом от имени суперпользователя назначим владельцам файла программы суперпользователя и добавим ей SUID-бит.</p>
+<figure>
+<img data-src="image/6.png" id="fig:006" style="width:70.0%" alt="Переназначение владельца и добавление SUID-бита" /><figcaption aria-hidden="true">Переназначение владельца и добавление SUID-бита</figcaption>
+</figure>
+<figure>
+<img data-src="image/7.png" id="fig:007" style="width:70.0%" alt="Новые права программы" /><figcaption aria-hidden="true">Новые права программы</figcaption>
+</figure>
+<h2 id="исследование-suid-бита-1">Исследование SUID-бита</h2>
+<p>Теперь при запуске этой программы видим, что она выводит e_uid: идентификатор пользователя, от имени которого она была запущена; real_uid - идентификатор пользователя, от имени которого она исполняется.</p>
+<figure>
+<img data-src="image/8.png" id="fig:008" style="width:70.0%" alt="Вывод simpleid2 с SUID-битом" /><figcaption aria-hidden="true">Вывод simpleid2 с SUID-битом</figcaption>
+</figure>
+<h2 id="исследование-suid-бита-2">Исследование SUID-бита</h2>
+<p>Создадим еще одну программу: аналог cat readfile, которая будет получать содержимое файла, название которого передано ей в аргументе, и выводить его на экран.</p>
+<figure>
+<img data-src="image/9.png" id="fig:009" style="width:70.0%" alt="readfile" /><figcaption aria-hidden="true">readfile</figcaption>
+</figure>
+<h2 id="исследование-suid-бита-3">Исследование SUID-бита</h2>
+<p>Скомпилируем ее, передадим файл кода во владение суперпользователю и добавим SUID-бит, после чего заберем у всех остальных пользователей все права на него. Видим, что теперь пользователь guest не может прочитать содержимое.</p>
+<figure>
+<img data-src="image/10.png" id="fig:010" style="width:70.0%" alt="Изменение прав файла кода" /><figcaption aria-hidden="true">Изменение прав файла кода</figcaption>
+</figure>
+<figure>
+<img data-src="image/11.png" id="fig:011" style="width:70.0%" alt="Пользователь без прав" /><figcaption aria-hidden="true">Пользователь без прав</figcaption>
+</figure>
+<h2 id="исследование-suid-бита-4">Исследование SUID-бита</h2>
+<p>Следующим шагом изменим права на программу, которая была скомпилирована по коду readfile.c. Добавим тот же SUID-бит и передадим во владение суперпользователю. Вилим, что теперь название программы подсвечено красным.</p>
+<figure>
+<img data-src="image/12.png" id="fig:012" style="width:70.0%" alt="Передача суперпользователю" /><figcaption aria-hidden="true">Передача суперпользователю</figcaption>
+</figure>
+<figure>
+<img data-src="image/13.png" id="fig:013" style="width:70.0%" alt="Добавление SUID-бита и новые права" /><figcaption aria-hidden="true">Добавление SUID-бита и новые права</figcaption>
+</figure>
+<h2 id="исследование-suid-бита-5">Исследование SUID-бита</h2>
+<p>Теперь при попытке прочитать readfile.c с помощью скомпилированной им программы мы получаем содержимое файла. Это происходит потому, что программа исполняется от имени суперпользователя и наделена всеми теми же правами, что и root. Она в том числе может прочитать и системный файл /etc/shadow, в котором по умолчанию хранится список пользователей и их хэшированные пароли.</p>
+<figure>
+<img data-src="image/14.png" id="fig:014" style="width:40.0%" alt="Чтение файлов через readfile" /><figcaption aria-hidden="true">Чтение файлов через readfile</figcaption>
+</figure>
+<h2 id="исследование-sticky-бита">Исследование Sticky-бита</h2>
+<p>Просмотрев в корневой директории системы права поддиректорий, видим, что на директории tmp установлен бит t. Полезно отметить также, что писать и читать эту директорию может кто угодно.</p>
+<figure>
+<img data-src="image/15.png" id="fig:015" style="width:70.0%" alt="Sticky-бит на директории tmp" /><figcaption aria-hidden="true">Sticky-бит на директории tmp</figcaption>
+</figure>
+<h2 id="исследование-sticky-бита-1">Исследование Sticky-бита</h2>
+<p>Далее создадим в этой директории файл file01. Изначально права на него позволяют пользователям кроме владельца только читать его, владельцу - записывать и читать. Добавим для остальных пользователей права на запись.</p>
+<figure>
+<img data-src="image/16.png" id="fig:016" style="width:70.0%" alt="Созданный в директории tmp файл" /><figcaption aria-hidden="true">Созданный в директории tmp файл</figcaption>
+</figure>
+<h2 id="исследование-sticky-бита-2">Исследование Sticky-бита</h2>
+<p>Переключившись на пользователя guest2, однако, мы все еще не можем сделать с этим файлом ничего, кроме прочтения, потому что пользователь guest2 входит в группу пользователя guest, а группе не были добавлены права на запись. Файл, кроме прочего, “защищен” Sticky-битом, установленным на директории.</p>
+<figure>
+<img data-src="image/17.png" id="fig:017" style="width:70.0%" alt="Работа с файлом от лица стороннего пользователя" /><figcaption aria-hidden="true">Работа с файлом от лица стороннего пользователя</figcaption>
+</figure>
+<h2 id="исследование-sticky-бита-3">Исследование Sticky-бита</h2>
+<p>От имени суперпользователя снимем Sticky-бит и снова проверим права на директорию tmp: символ t пропал.</p>
+<figure>
+<img data-src="image/18.png" id="fig:018" style="width:70.0%" alt="Снятие Sticky-бита" /><figcaption aria-hidden="true">Снятие Sticky-бита</figcaption>
+</figure>
+<h2 id="исследование-sticky-бита-4">Исследование Sticky-бита</h2>
+<p>Теперь уже, все еще не являясь владельцем файла, мы можем его переименовывать и удалять.</p>
+<figure>
+<img data-src="image/19.png" id="fig:019" style="width:70.0%" alt="Работа с файлом от лица стороннего пользователя" /><figcaption aria-hidden="true">Работа с файлом от лица стороннего пользователя</figcaption>
+</figure>
+</section>
+<section id="выводы" class="slide level1">
+<h1>Выводы</h1>
+<p>Изучены механизмы изменения идентификаторов, применения SetUID- и Sticky-битов. Получены практические навыки работы в консоли с дополнительными атрибутами. Рассмотрена работа механизма смены идентификатора процессов пользователей, а также влияние бита Sticky на запись и удаление файлов.</p>
+</section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^4//dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^4//plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+      
+        // Push each slide change to the browser history
+        history: true,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>

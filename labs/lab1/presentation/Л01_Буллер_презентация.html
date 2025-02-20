@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Буллет Т. А.">
+  <title>Лабораторная работа №1</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/beige.css" id="theme">
+  
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Лабораторная работа №1</h1>
+  <p class="subtitle">Установка и конфигурация операционной системы на виртуальную машину</p>
+  <p class="author">Буллет Т. А.</p>
+  <p class="date">14 февраля 2025</p>
+</section>
+
+<section id="информация" class="slide level1">
+<h1>Информация</h1>
+<h2 id="докладчик">Докладчик</h2>
+<div class="columns" data-align="center">
+<div class="column" style="width:70%;">
+<ul>
+<li>Буллер Татьяна Александровна</li>
+<li>студент направления Бизнес-информатика</li>
+<li>Российский университет дружбы народов</li>
+</ul>
+</div><div class="column" style="width:30%;">
+
+</div>
+</div>
+</section>
+<section id="вводная-часть" class="slide level1">
+<h1>Вводная часть</h1>
+<h2 id="объект-и-предмет-исследования">Объект и предмет исследования</h2>
+<ul>
+<li>Операционная система linux, дисрибутив Rocky</li>
+<li>Среда виртуализации VirtualBox</li>
+</ul>
+<h2 id="цели-и-задачи">Цели и задачи</h2>
+<ul>
+<li>Приобретение практических навыков установки операционной системы на виртуальную машину</li>
+<li>Приобретение навыков настройки минимально необходимых для дальнейшей работы сервисов</li>
+</ul>
+<h2 id="материалы-и-методы">Материалы и методы</h2>
+<ul>
+<li>Процессор <code>pandoc</code> для входного формата Markdown</li>
+<li>Среда виртуализации VirtualBox</li>
+</ul>
+</section>
+<section id="выполнение-лабораторной-работы" class="slide level1">
+<h1>Выполнение лабораторной работы</h1>
+<h2 id="предварительная-настройка">Предварительная настройка</h2>
+<p>Для создания виртуальной машины была использована среда виртуализации VirtualBox. После выбора в меню “Машина - Создать” было введено имя машины, папка в системе, где будут храниться файлы машины, и файл образа операционной системы.</p>
+<figure>
+<img data-src="image/1.png" id="fig:001" style="width:40.0%" alt="Основные настройки системы" /><figcaption aria-hidden="true">Основные настройки системы</figcaption>
+</figure>
+<h2 id="предварительная-настройка-1">Предварительная настройка</h2>
+<p>Затем были введены имя пользователя и хоста (при непосредственной настройке системы эти пункты были заменены)</p>
+<figure>
+<img data-src="image/2.png" id="fig:002" style="width:40.0%" alt="Имя пользователя и хоста" /><figcaption aria-hidden="true">Имя пользователя и хоста</figcaption>
+</figure>
+<h2 id="предварительная-настройка-2">Предварительная настройка</h2>
+<p>Далее были выделены ресурсы системы, с которыми машина сможет работать: ядра процессора, операционная и физическая память.</p>
+<figure>
+<img data-src="image/3.png" id="fig:003" style="width:40.0%" alt="Ресурсы системы" /><figcaption aria-hidden="true">Ресурсы системы</figcaption>
+</figure>
+<h2 id="предварительная-настройка-3">Предварительная настройка</h2>
+<figure>
+<img data-src="image/4.png" id="fig:004" style="width:40.0%" alt="Объем памяти" /><figcaption aria-hidden="true">Объем памяти</figcaption>
+</figure>
+<h2 id="установка-системы">Установка системы</h2>
+<p>После инициализации образа была начата настройка непосредственно ОС Rocky Linux. Первый из этапов настройки - выбор раскладки клавиатуры.</p>
+<figure>
+<img data-src="image/5.png" id="fig:005" style="width:40.0%" alt="Раскладка клавиатуры" /><figcaption aria-hidden="true">Раскладка клавиатуры</figcaption>
+</figure>
+<h2 id="установка-системы-1">Установка системы</h2>
+<p>Дальнейшая настройка состояла из настройки пользователя и суперпользователя, выбора приложений, которые впоследствии будут доустановлены на систему, конфигурации места на жестком диске и сетевого интерфейса.</p>
+<figure>
+<img data-src="image/6.png" id="fig:006" style="width:40.0%" alt="Меню установки системы" /><figcaption aria-hidden="true">Меню установки системы</figcaption>
+</figure>
+<h2 id="установка-системы-2">Установка системы</h2>
+<p>Настройка суперпользователя состоит из выбора пароля для него и двух дополнительных опций: разрешения входа по SSH и блокировки учетной записи.</p>
+<figure>
+<img data-src="image/7.png" id="fig:007" style="width:40.0%" alt="Настройка суперпользователя" /><figcaption aria-hidden="true">Настройка суперпользователя</figcaption>
+</figure>
+<h2 id="установка-системы-3">Установка системы</h2>
+<p>Настройка пользователя состоит из выбора имени, логина и пароля для пользователя, а также двух дополнительных опций: назначения пользователя администратором и требования пароля для учетной записи.</p>
+<figure>
+<img data-src="image/8.png" id="fig:008" style="width:40.0%" alt="Настройка пользователя" /><figcaption aria-hidden="true">Настройка пользователя</figcaption>
+</figure>
+<h2 id="установка-системы-4">Установка системы</h2>
+<p>При настройке места хранения можно добавить сетевые диски, настроить шифрование данных и сконфигурировать устройство хранения операционной системы по-своему. Я оставлю настройки по умолчанию.</p>
+<figure>
+<img data-src="image/9.png" id="fig:009" style="width:40.0%" alt="Конфигурация устройств хранения" /><figcaption aria-hidden="true">Конфигурация устройств хранения</figcaption>
+</figure>
+<h2 id="установка-системы-5">Установка системы</h2>
+<p>Выбор программ предлагает настроить базовое окружение и при необходимости выбрать дополнительные компоненты, которые будут установлены вместе с системой.</p>
+<figure>
+<img data-src="image/10.png" id="fig:010" style="width:40.0%" alt="Выбор программ" /><figcaption aria-hidden="true">Выбор программ</figcaption>
+</figure>
+<h2 id="завершение-установки">Завершение установки</h2>
+<p>После завершения установки рассмотрим детали процесса запуска системы с помощью комбинации команд dmesg и grep. Видим, что версия установленной системы - 5.14.0, процессор 2304 МГц, доступная память - 20 ГБ, процессор i7-11800H, гипервизор - KVM.</p>
+<figure>
+<img data-src="image/11.png" id="fig:011" style="width:40.0%" alt="Детали системы" /><figcaption aria-hidden="true">Детали системы</figcaption>
+</figure>
+<h2 id="завершение-установки-1">Завершение установки</h2>
+<p>В процессе установки системы не было произведено переименования хоста, поэтому сделаем это сейчас командой hostnamectl и проверим правильность ее исполнения, вызвав ее без дополнительных флагов и аргументов.</p>
+<figure>
+<img data-src="image/12.png" id="fig:012" style="width:40.0%" alt="Имя хоста" /><figcaption aria-hidden="true">Имя хоста</figcaption>
+</figure>
+</section>
+<section id="выводы" class="slide level1">
+<h1>Выводы</h1>
+<p>Приобретены практические навыки установки операционной системы на виртуальную машину и настройки минимально необходимых для дальнейшей работы сервисов.</p>
+</section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^4//dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^4//plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+      
+        // Push each slide change to the browser history
+        history: true,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>
