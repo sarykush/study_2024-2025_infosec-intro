@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Буллер Т.А.">
+  <title>Внешний курс. Этап 1</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/beige.css" id="theme">
+  
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Внешний курс. Этап 1</h1>
+  <p class="subtitle">Безопасность в сети</p>
+  <p class="author">Буллер Т.А.</p>
+  <p class="date">12 мая 2025</p>
+</section>
+
+<section id="информация" class="slide level1">
+<h1>Информация</h1>
+<h2 id="докладчик">Докладчик</h2>
+<ul>
+<li>Буллер Татьяна Александровна</li>
+<li>студент направления Бизнес-информатика</li>
+<li>Российский университет дружбы народов</li>
+</ul>
+</section>
+<section id="вводная-часть" class="slide level1">
+<h1>Вводная часть</h1>
+<h2 id="объект-и-предмет-исследования">Объект и предмет исследования</h2>
+<ul>
+<li>Интернет и его протоколы</li>
+<li>Модель TCP/IP</li>
+<li>Браузер ТОР</li>
+</ul>
+<h2 id="цели-и-задачи">Цели и задачи</h2>
+<ul>
+<li>Получение и закрепление на практике знаний об основных механизмах работы сети Интернет и их слабых местах.</li>
+</ul>
+</section>
+<section id="выполнение-контрольных-заданий" class="slide level1">
+<h1>Выполнение контрольных заданий</h1>
+<h2 id="как-работает-интернет">Как работает Интернет</h2>
+<figure>
+<img data-src="image/1.png" id="fig:001" style="width:20.0%" alt="Задание 1" /><figcaption aria-hidden="true">Задание 1</figcaption>
+</figure>
+<p>Протоколы TCP и UDP - протоколы транспортного уровня, IP - протокол сетевого уровня. Прикладным из перечисленных является только HTTPS. Это же рассуждение дает ответ на следующий вопрос.</p>
+<figure>
+<img data-src="image/2.png" id="fig:002" style="width:20.0%" alt="Задание 2" /><figcaption aria-hidden="true">Задание 2</figcaption>
+</figure>
+<h2 id="как-работает-интернет-1">Как работает Интернет</h2>
+<figure>
+<img data-src="image/3.png" id="fig:003" style="width:20.0%" alt="Задание 3" /><figcaption aria-hidden="true">Задание 3</figcaption>
+</figure>
+<p>Первый из адресов начинается с 421, второй содержит 256. Ни то, ни другое не может являться корректным адресом IPv4, так как исловный максимальный адрес, который можно получить в этом стандарте - 255.255.255.255</p>
+<h2 id="как-работает-интернет-2">Как работает Интернет</h2>
+<figure>
+<img data-src="image/4.png" id="fig:004" style="width:20.0%" alt="Задание 4" /><figcaption aria-hidden="true">Задание 4</figcaption>
+</figure>
+<p>DNS (Domain Name Server) сопоставляет адрес сайта с его доменным именем и обеспечивает “навигацию” в Интернете. Он не сегментирует данные, не выбирает маршруты для пакетов и не занимается адресацией.</p>
+<h2 id="как-работает-интернет-3">Как работает Интернет</h2>
+<figure>
+<img data-src="image/5.png" id="fig:005" style="width:40.0%" alt="Задание 5" /><figcaption aria-hidden="true">Задание 5</figcaption>
+</figure>
+<p>Прикладной уровень должен быть “верхним”, канальный - нижним, таким образом, корректна только последняя цепочка.</p>
+<h2 id="как-работает-интернет-4">Как работает Интернет</h2>
+<figure>
+<img data-src="image/6.png" id="fig:006" style="width:40.0%" alt="Задание 6" /><figcaption aria-hidden="true">Задание 6</figcaption>
+</figure>
+<p>HTTP не предполагает шифрования данных, поэтому считается небезопасным и устаревшим. Шифрует данные между клиентом и сервером HTTPS.</p>
+<h2 id="как-работает-интернет-5">Как работает Интернет</h2>
+<figure>
+<img data-src="image/7.png" id="fig:007" style="width:40.0%" alt="Задание 7" /><figcaption aria-hidden="true">Задание 7</figcaption>
+</figure>
+<p>HTTPS состоит из двух фаз: рукопожатия между клиентом и сервером, в результате которого устанавливаются “условия” общения, и обмена зашифрованными данными. Отсюда очевидно, что подходит только ответ 2.</p>
+<h2 id="как-работает-интернет-6">Как работает Интернет</h2>
+<figure>
+<img data-src="image/8.png" id="fig:008" style="width:40.0%" alt="Задание 8" /><figcaption aria-hidden="true">Задание 8</figcaption>
+</figure>
+<p>Версия протокола TLS определяется совместно сервером и клиентом. ни одна из сторон не может “диктовать” свои условия другой.</p>
+<h2 id="как-работает-интернет-7">Как работает Интернет</h2>
+<figure>
+<img data-src="image/9.png" id="fig:009" style="width:40.0%" alt="Задание 9" /><figcaption aria-hidden="true">Задание 9</figcaption>
+</figure>
+<p>В фазе рукопожатия не предусмотрено именно шифрования данных, так как оно выполняется после установки условий обмена данными в отдельной фазе.</p>
+<h2 id="персонализация-сети">Персонализация сети</h2>
+<figure>
+<img data-src="image/10.png" id="fig:010" style="width:20.0%" alt="Задание 10" /><figcaption aria-hidden="true">Задание 10</figcaption>
+</figure>
+<p>По-хорошему куки не должны хранить конфиденциальную информацию, такую как пароль или адрес пользователя. поэтому подходят только два последних ответа: идентификатор пользователя и сессии.</p>
+<h2 id="персонализация-сети-1">Персонализация сети</h2>
+<figure>
+<img data-src="image/11.png" id="fig:011" style="width:20.0%" alt="Задание 11" /><figcaption aria-hidden="true">Задание 11</figcaption>
+</figure>
+<p>Куки хранят информацию, но не используются для обеспечения надежности соединения самого по себе. Хотя хранение информации на стороне клиента может в общем и целом снижать загруженность сервера.</p>
+<h2 id="персонализация-сети-2">Персонализация сети</h2>
+<figure>
+<img data-src="image/12.png" id="fig:012" style="width:40.0%" alt="Задание 12" /><figcaption aria-hidden="true">Задание 12</figcaption>
+</figure>
+<p>Куки присваиваются (генерируются) пользователю сервером и хранятся на стороне клиента.</p>
+<h2 id="персонализация-сети-3">Персонализация сети</h2>
+<figure>
+<img data-src="image/13.png" id="fig:013" style="width:20.0%" alt="Задание 13" /><figcaption aria-hidden="true">Задание 13</figcaption>
+</figure>
+<p>Сессионные куки отвечают за хранение данных, связанных с конкретной сессией (моментом посещения и использования) сайта. Они храняется в браузере только во время использования сайта (жизни сессии).</p>
+<h2 id="браузер-тор.-анонимизация">Браузер ТОР. Анонимизация</h2>
+<figure>
+<img data-src="image/14.png" id="fig:014" style="width:40.0%" alt="Задание 14" /><figcaption aria-hidden="true">Задание 14</figcaption>
+</figure>
+<p>В сети ТОР минимум три промежуточных узла: охранный, промежуточный и выходной.</p>
+<h2 id="браузер-тор.-анонимизация-1">Браузер ТОР. Анонимизация</h2>
+<figure>
+<img data-src="image/15.png" id="fig:015" style="width:20.0%" alt="Задание 15" /><figcaption aria-hidden="true">Задание 15</figcaption>
+</figure>
+<p>Адрес получателя известен отправителю (он выбирает, кому направить сообщение) и выходному узлу (он передает сообщение, полученное от предыдущих узлов цепи, непосредственно получателю).</p>
+<h2 id="браузер-тор.-анонимизация-2">Браузер ТОР. Анонимизация</h2>
+<figure>
+<img data-src="image/16.png" id="fig:016" style="width:40.0%" alt="Задание 16" /><figcaption aria-hidden="true">Задание 16</figcaption>
+</figure>
+<p>Общий секретный ключ отправитель генерирует с каждым из узлов цепи для сохранения целостности передачи.</p>
+<h2 id="браузер-тор.-анонимизация-3">Браузер ТОР. Анонимизация</h2>
+<figure>
+<img data-src="image/17.png" id="fig:017" style="width:40.0%" alt="Задание 17" /><figcaption aria-hidden="true">Задание 17</figcaption>
+</figure>
+<p>Получатель не должен использовать браузер, основанный на луковой маршрутизации, так как доставка сообщения не зависит от него.</p>
+<h2 id="беспроводные-сети-wi-fi">Беспроводные сети Wi-Fi</h2>
+<figure>
+<img data-src="image/18.png" id="fig:018" style="width:40.0%" alt="Задание 18" /><figcaption aria-hidden="true">Задание 18</figcaption>
+</figure>
+<p>Wi-Fi - технология беспроводной сети; работает не только со смартфонами или компьютерами и описана в стандартве 802.11</p>
+<h2 id="беспроводные-сети-wi-fi-1">Беспроводные сети Wi-Fi</h2>
+<figure>
+<img data-src="image/19.png" id="fig:019" style="width:20.0%" alt="Задание 19" /><figcaption aria-hidden="true">Задание 19</figcaption>
+</figure>
+<p>Wi-Fi - канал передачи данных, и работает, соответственно, на канальном уровне. На сетевом работает IP, на прикладном - HTTP/HTTPS, на транспортном - TCP/UDP.</p>
+<h2 id="беспроводные-сети-wi-fi-2">Беспроводные сети Wi-Fi</h2>
+<figure>
+<img data-src="image/20.png" id="fig:020" style="width:40.0%" alt="Задание 20" /><figcaption aria-hidden="true">Задание 20</figcaption>
+</figure>
+<p>Наименее безопасен из перечисленных WEP, так как длина ключа в этом протоколе не могла превышать 40 бит.</p>
+<h2 id="беспроводные-сети-wi-fi-3">Беспроводные сети Wi-Fi</h2>
+<figure>
+<img data-src="image/21.png" id="fig:021" style="width:40.0%" alt="Задание 21" /><figcaption aria-hidden="true">Задание 21</figcaption>
+</figure>
+<p>Данные между хостом и роутером передаются только после аутентификации устройства в сети в зашифрованном виде, поэтому все ответы, кроме 2, неверны.</p>
+<h2 id="беспроводные-сети-wi-fi-4">Беспроводные сети Wi-Fi</h2>
+<figure>
+<img data-src="image/22.png" id="fig:022" style="width:40.0%" alt="Задание 22" /><figcaption aria-hidden="true">Задание 22</figcaption>
+</figure>
+<p>Энтерпрайс - решение для бизнеса. Для организации домашних сетей оно не используется.</p>
+</section>
+<section id="выводы" class="slide level1">
+<h1>Выводы</h1>
+<p>Получены и закреплены на практике знания об основных механизмах работы сети Интернет и их слабых местах.</p>
+</section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^4//dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^4//plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+      
+        // Push each slide change to the browser history
+        history: true,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>
